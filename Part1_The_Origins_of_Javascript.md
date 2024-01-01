@@ -146,4 +146,118 @@ C와 JavaScript 표현식 사이의 가장 중요한 차이점은 JavaScript 연
 
 ## 3.3. 객체(Objects)
 
-Javascript 1.0의 객체는 "속성(property)"라 불리는 원소들로 이루어진 연관 배열이다.
+```js
+// using Object constructor
+var pt = new Object;
+pt.x=0;
+pt.y=0;
+
+// using custom constructor
+function Point (x,y) {
+this.x = x;
+this.y = y;
+}
+var pt = new Point (0, 0);
+```
+
+그림 5. Javascript 1.0의 객체 생성을 위한 다른 방법들. Object 생성자로 객체를 생성한 뒤 속성을 추가할 수도 있고 생성자 함수를 만들어서 객체가 만들어지는 동안 속성을 추가할 수도 있다.
+---
+Javascript 1.0의 객체는 "속성(property)"라 불리는 원소들로 이루어진 연관 배열이다. 각 속성은 문자열로 된 키와 값을 가지고 값은 Javascript의 어떤 데이터 타입이든 될 수 있다. 속성은 동적으로 추가될 수 있다. JavaScript 1.0/1.1은 객체에서 속성을 제거하는 방법을 제공하지 않았다.
+
+키 문자열이 식별자 이름에 대한 문법 규칙을 준수할 시 해당 속성은 점 표기법을 통해서 접근할 수 있다. 예를 들어서 `obj.prop0`과 같이 할 수 있다. 식별자가 아닌 키를 가진 속성을 포함한 모든 속성은 대괄호 표기법으로 접근할 수 있다. 이 표기법을 사용하면 대괄호로 둘러싸인 표현식은 평가되고 문자열로 변환되어 속성의 키로 사용된다. 예를 들어 obj["prop"+n]은 n의 값이 0일 때 obj.prop0과 동일하다. 존재하지 않는 속성에 값을 할당하면 새로운 속성이 생성된다. 만약 존재하지 않는 속성의 값에 접근하려고 하면 보통 undefined가 반환된다. 하지만 Javascript 1.0/1.1에서는 대괄호 표기법을 사용해 존재하지 않는 객체의 속성 값에 접근했으며 사용한 속성 키가 음이 아닌 정수의 문자열 표현이었을 경우 null이 반환되었다.
+
+속성은 데이터 저장소로 사용될 수도 있고 객체의 동작을 구현하는 데에 사용될 수도 있다. 그 값이 함수인 속성은 객체의 메서드로서 호출될 수 있다. 객체의 메서드로 호출된 함수는 키워드 this와의 동적 바인딩을 통해 자신을 호출한 객체 그 자신에게 접근할 수 있다(§3.7.4).
+
+객체는 내장 함수나 사용자 정의 함수에 new 연산자를 적용하여 생성된다. 이런 용도로 사용되기 위해 만들어진 함수를 "생성자(constructor)"라고 한다. 생성자는 일반적으로 새로운 객체에 속성을 추가한다. 이 속성들은 저장할 데이터 혹은 메서드이다. 내장 생성자 Object는 초기에 속성이 없는 새로운 객체를 생성하는 데에 사용될 수 있다. 그림 5는 Object 생성자나 사용자 정의 생성자 함수가 새로운 객체를 생성하는 방법을 보여준다.
+
+JavaScript 1.0에는 또한 내장 Array 생성자가 있다. 하지만 Array 생성자로 생성된 객체와 Object 생성자로 생성된 객체 사이의 유일한 차이점은 객체에 표시되는 디버깅 문자열뿐이다. JavaScript 1.0의 Array 생성자로 생성된 객체는 length 속성을 가지고 있지 않았다.
+
+정수값을 키로 사용하는 속성들을 생성함으로써 어떤 객체에 대해서든 배열과 유사한 인덱싱 동작을 할 수 있다. 이런 객체는 정수가 아닌 키를 가진 속성들도 가질 수 있다.
+
+```js
+var a = new Object; // or new Array
+a[0] = " zero ";
+a[1] = " one";
+a[2] = " two";
+a. length = 3;
+```
+
+---
+
+```js
+// define functions to be used as methods
+function ptSum(pt2) {
+    return new Point(this.x + pt2.x, this.y + pt2.y)
+}
+
+function ptDistance(pt2) {
+    return Math.sqrt(Math.pow(pt2.x - this.x, 2) + Math.pow(pt2.y - this.y, 2));
+}
+// define Point constructor
+function Point(x, y) {
+    // create and initialize a new object 's data properties
+    this.x = x;
+    this.y = y;
+    // add methods to each instance object
+    this.sum = ptSum;
+    this.distance = ptDistance;
+}
+var origin = new Point(0, 0); // create a Point object
+```
+
+그림 6. Javascript 1.0에서 추상화된 Point 객체를 생성한다. 각 인스턴스는 각각의 메서드 속성들을 가지고 있다.
+
+---
+
+Javascript 1.0은 상속$^{g}$의 개념이 없다. 프로그램은 각각의 새로운 객체에 모든 속성을 개별적으로 추가해야 한다. 이는 일반적으로 프로그램에서 사용하는 각 "클래스" 객체에 대한 생성자 함수를 정의하는 방식으로 이루어진다. 그림 6은 Javascript 1.0을 사용하여 작성된 간단한 Point 추상화 정의를 보여준다. 이 예제에서 중요한 점은 다음과 같다.
+
+- 각 메서드는 전역 함수로 정의되어야 한다. 이 함수들은 다른 추상화 객체의 메서드 함수를 정의하는 데에 사용되는 이름과 충돌하지 않을 가능성이 있는 이름을 가져야 한다(예: ptSum, ptDistance).
+- 객체가 생성되는 시점에 객체 속성들은 각 메서드를 위해 생성된 전역 함수로 초기화된 값으로 생성되어야 한다.
+- 메서드는 선언된 전역 이름(ptDistance)보다는 객체 속성 이름(origin.distance)을 사용하여 호출된다.
+
+Javascript 1.1에서는 각각의 새로운 인스턴스에 직접 메서드 속성을 생성할 필요가 없어졌다. 1.1부터는 생성자 함수 객체의 `prototype`이라는 속성을 통해서 생성자 함수 인스턴스의 프로토타입$^{g}$ 객체를 연결할 수 있게 되었다. JavaScript 1.1 가이드 [Netscape 1996e]는 `prototype`을 "지정된 타입의 모든 객체에 의해 공유되는 속성"으로 설명한다. 이건 모호한 설명이고, 다음과 같이 더 잘 표현할 수 있다. "해당 생성자에 의해 생성된 모든 객체에 의해 공유되는 속성을 가진 객체"라고 말이다. 이런 공유 메커니즘은 더 자세히 설명되지는 않았지만 다음과 같은 프로토타입 객체의 속성들을 관찰할 수 있다.
+
+- 해당 객체를 생성한 생성자 함수의 `prototype` 객체에 정의된 속성 이름에 접근하면 생성자 함수의 `prototype` 객체의 해당 속성 값이 반환된다.
+- 프로토타입 객체의 속성을 추가하거나 수정하는 것은 기존에 해당 prototype 속성을 가진 생성자 함수에 의해 만들어진 객체에 즉시 반영된다.
+- 객체의 생성자 함수의 `prototype`에 이미 정의되어 있는 속성과 같은 이름의 속성에 값을 할당하면 객체의 속성 값이 생성자 함수의 `prototype`에 정의된 속성 값을 덮어씌운다(shadow$^{g}$[^18]).
+
+내장 Object.prototype 객체의 속성은 객체 또는 객체의 프로토타입 객체에 의해 덮어씌워지지 않는 한 모든 객체에서 접근 가능하다.
+
+[^18]: 프로토타입의 속성을 덮어씌우는(over-ride)새로운 속성을 만드는 것
+
+```js
+// define functions to be used as methods
+function ptSum(pt2) {
+    return new Point(this.x + pt2.x, this.y + pt2.y)
+}
+
+function ptDistance(pt2) {
+    return Math.sqrt(Math.pow(pt2.x - this.x, 2) + Math.pow(pt2.y - this.y, 2));
+}
+// define Point constructor
+function Point(x, y) {
+    // create / initialize a new object's data properties
+    this.x = x;
+    this.y = y;
+}
+// add methods to shared prototype object
+Point.prototype.sum = ptSum;
+Point.prototype.distance = ptDistance;
+var origin = new Point(0, 0); // create a Point object
+```
+
+그림 7. Javascript 1.1에서 추상화된 Point 객체를 생성한다. 각 Point 인스턴스 객체는 직접 속성들을 정의하는 대신 `Point.prototype` 객체에서 메서드 속성들을 상속받는다.
+
+---
+
+그림 7은 그림 6에서 했던 간단한 Point 추상화를 Javascript 1.1에서 다시 정의한 것이다. 이는 메서드가 각 인스턴스 객체에서 반복적으로 정의되는 것과 달리 프로토타입 객체에 한 번만 정의된다는 점이 다르다. 프로토타입 속성을 통해서 객체에서 접근할 수 있는 속성은 상속된 속성$^{g}$이라고 한다. 객체에 직접 정의된 속성은 자체 속성$^{g}$이라고 한다. 자체 속성은 동일한 이름의 자체 속성을 덮어씌운다.
+
+프로토타입 객체 속성은 보통 메서드다. 이 경우 생성자를 통해 제공된 프로토타입 객체는 C++의 vtable이나 Smalltalk의 MethodDictionary와 같은 역할을 하여 객체들의 집합과 공통의 행동을 연관시킨다. 생성자 함수는 본질적으로 클래스 객체의 역할을 하고 프로토타입은 클래스 인스턴스들에게 공유되는 메서드들의 컨테이너와 같다. 이것은 Javascript 1.1의 객체 모델에 대한 합리적인 해석이지만 유일한 해석은 아니다.
+
+생성자 함수의 `prototype` 이라는 속성의 작명은 브랜든 아이크가 다른 객체 모델을 염두에 두었다는 명백한 단서이다. 그 모델은 Self 프로그래밍 언어에 의해 영감을 받았다[Ungar and Smith 1987]. Self에서는 새로운 객체를 만들 때 일부 객체 카테고리의 프로토타입 객체를 복제하여 만든다. 각각의 복제본은 프로토타입 객체를 참조하는 부모 링크를 가지고 있어서 프로토타입이 그 복제본들에게 공통적으로 제공하고자 하는 기능들을 제공할 수 있었다. Javascript 1.1 객체 모델은 Self의 모델의 변형이라고 할 수 있다. 프로토타입 객체는 생성자 함수를 통해서 간접적으로 접근되고 new 연산자는 프로토타입에서 새로운 인스턴스를 복제한다. 복제된 인스턴스는 프로토타입 객체의 속성들을 상속$^{g}$받아서 공통 기능으로 사용할 수 있다. 일부 Javascript 프로그래머들은 이 메커니즘을 "프로토타입 상속$^{g}$"이라고 부른다. 이것은 위임의 한 형태이다. 일부 Javascript 프로그래머들은 Java와 다른 많은 객체지향 언어들에서 사용되는 상속 스타일을 가리키기 위해 "전통적인 상속(classical inheritance)$^{g}$"이라는 중의적 표현을 사용한다.
+
+JavaScript 1.1 문서 [Netscape 1996e]는 이러한 객체 모델 중 어느 것도 완전히 설명하지 않는다. 그 문서는 1995년 12월 넷스케이프와 선의 보도자료와 일관성 있는 마케팅 전략을 유지했다. Javascript는 추상화된 진짜 객체 정의(클래스 정의)는 Java로 쓰여질 때 그 객체들 간의 상호작용을 위한 스크립트 언어로 포지셔닝되었다. Javascript 고유의 객체 추상화 기능은 별로 주목을 끌지 않고 잘 문서화되지 않은 보조 기능으로 제한되었다.
+
+## 3.4. 함수 객체(Function Objects)
+
+Javascript 1.0/1.1의 함수 정의는 호출 가능한 함수를 만들고 이름짓는다.
