@@ -343,3 +343,171 @@ Javascript에는 몇몇 이상하거나 예상치 못한 기능들이 있다. �
 
 ### 3.7.1. 재정의(Redundant Declarations)
 
+JavaScript는 스코프 내에서 같은 이름을 가진 선언을 허용한다. 함수 내부에서 발생한 이름의 모든 선언은 함수 본문 전체에서 보이는 단일 바인딩에 해당한다. 예를 들어 다음은 유효한 함수 정의이다.
+
+```js
+function f(x, x) { // x names the second parameter , ignores 1st x
+    var x; // same binding as second parameter
+    for (var x in obj) { // same binding as second parameter
+        var x = 1,
+            x = 2; // same bindings as second parameter
+    }
+    var x = 3; // same binding as second parameter
+}
+```
+
+함수 `f` 내의 모든 `var` 선언은 동일한 변수 바인딩을 참조한다. 이는 함수의 2번째 매개변수에 대한 바인딩과도 같다. 같은 이름이 함수의 형식 매개변수 목록에 여러 번 나타날 수도 있다. 함수 본문을 실행하기 전에 `var` 선언에 의해 정의된 변수들은 모두 `undefined`로 초기화된다. 그러나 매개변수 이름과 동일한 이름을 가진 `var` 변수의 경우에는 같은 이름을 가진 매개변수와 같은 초기값을 가진다. 중복 선언을 포함하여 `var` 선언의 초기화는 초기화된 변수에 대한 할당과 동일한 의미를 가진다. 이들은 함수 본문 내에서 정상적인 실행 순서에 도달했을 때 실행된다.
+
+스크립트 내에서 동일한 이름의 여러 함수 선언 즉 `function` 키워드가 쓰인 곳이 있을 수도 있다. 그럴 경우 동일한 이름의 함수 선언들 중 마지막 함수 선언이 해당 이름으로 사용된다. 그리고 이 함수 선언은 스크립트의 최상단으로 끌어올려져서 그 이름과 같은 전역 변수를 초기화하는 데에 사용된다. 같은 이름의 다른 모든 `function` 선언은 무시된다. 동일한 이름에 대해 `function` 선언과 `var` 변수 선언이 동시에 있을 경우 그들은 모두 동일한 변수를 참조한다. 그리고 코드를 한 줄씩 실행하는 도중에 `var` 선언을 통한 초기화가 발견되면 함수 값은 덮어씌워진다.
+
+### 3.7.2. 자동 형변환과 == 연산자(Automatic Coercions and the == Operator)
+
+자동 형변환은 Javascript가 간단한 스크립트 언어로 도입될 때 진입 장벽을 낮추기 위해 만들어졌다. 하지만 Javascript가 일반 목적의 언어로 발전해 감에 따라서 이런 형변환은 혼란과 버그의 주요한 원인임이 증명되었다. 이는 특히 `==` 연산자에서 두드러진다. 모카의 초기 10일간의 스프린트 이후 알파 유저들의 요청에 의해 몇 가지 문제가 되는 형변환이 추가되었다. 이는 Javascript와 HTTP/HTML의 통합을 쉽게 만들기 위한 요구 사항이었다. 예를 들어서 넷스케이프의 내부 사용자들은 문자열 값 `"404"`를 포함하는 HTTP 상태 코드가 `==` 연산자를 통해 숫자 404와 동일하게 비교되기를 원했다. 또한 그들은 HTML 폼의 빈 필드에 대한 기본값을 제공하기 위해 빈 문자열이 숫자 맥락에 있을 때는 0으로 자동 형변환되기를 요구했다. 이런 형변환은 다음과 같은 놀라운 결과를 가져왔다. `1 == '1'`과 `1 == '1.0'`은 참이지만 `'1' != '1.0'`이다.
+
+Javascript 1.0은 `if` 문의 조건에서 `=` 연산자를 `==`와 똑같이 취급한다. 예를 들어 다음 두 줄의 코드는 같은 의미이다.
+
+```js
+if (a = 0) alert("true"); // these two statements are equivalent
+if (a == 0) alert("true");
+```
+
+### 3.7.3. 32비트 산수(32-bit Arithmetic)
+
+Javascript의 비트 논리 연산자는 IEEE double 부동 소수점 인코딩 내에 있는 32비트 값에 작용한다. 비트 연산자는 비트 연산을 수행하기 위해 먼저 피연산자를 정수로 잘라내고 32비트 2의 보수 값으로 모듈러 변환을 수행한다. 그래서 표현식 `x|0`(`|`는 비트 or 연산자)에서 숫자값 `x`는 32비트 값으로 강제될 수 있다. 이런 방식을 사용하여 32비트 부호 있는 덧셈을 이렇게 수행할 수 있다.
+
+```js
+function int32bitAdd(x, y) {
+    return ((x | 0) + (y | 0)) | 0 // addition with result truncated to 32-bits
+}
+```
+
+부호 없는 32비트 연산도 할 수 있다. `|0` 대신 부호 없는 오른쪽 쉬프트 연산자를 사용해 `>>>0`과 같이 하면 된다.
+
+### 3.7.4. this 키워드(The this keyword)
+
+모든 함수는 `this` 매개변수를 암시적으로 가지고 있다. 함수가 메소드 형식으로 호출될 때 `this` 매개변수는 메소드에 접근하기 위해 사용된 객체로 설정된다. 이는 대부분의 객체 지향 언어에서 `this`(또는 `self`)에 부여된 의미와 동일하다. 그러나 Javascript는 독립된 함수와 객체 메서드에 대해 같은 형식으로 정의하는데 이 둘의 this 매개변수는 서로 다른 의미를 가지기 때문에 이는 많은 프로그래머들에게 있어 혼란과 버그의 원인이 되었다.
+
+함수가 객체를 통하지 않고 직접 호출되면 `this`는 암시적으로 전역 객체로 설정된다. 전역 객체의 속성에는 프로그램의 모든 전역 변수가 포함된다. 그래서 독립적으로 호출된 함수에서의 `this`의 속성 참조는 전역 변수에 대한 참조와 같다. `this`의 처리가 함수가 어떤 방식으로 호출되는지에 따라 달라지기 때문에 같은 `this` 참조도 다른 방식의 호출에서 다른 의미를 가질 수 있다. 예를 들어 이런 것이다.
+
+```js
+function setX(value) {
+    this.x = value
+}
+var obj = new Object;
+obj.setX = setX; // install setX as a method of obj
+
+obj.setX(42); // calls setX as a method
+alert(obj.x); // displays : 42
+
+setX(84); // directly call setX
+alert(x); // accesses global variable x; displays 84
+alert(obj.x); // displays : 42
+```
+
+`this`에 대한 혼란을 일으키는 다른 요인도 있다. 몇몇 HTML 요소들은 Javascript 코드를 메서드로 호출되도록 암시적으로 변환한다. 예를 들어 다음과 같은 HTML 코드가 있다고 하자.
+
+```html
+<button name="B" onclick='alert(this.name + " clicked")'>Click me</button>
+```
+
+이벤트 핸들러가 실행되면 버튼의 `onclick` 메서드가 호출된다. 해당 메서드의 `this`는 버튼 객체를 가리키며 `this.name`은 버튼 객체의 `name` 속성값을 검색한다.
+
+### 3.7.5. 인수 객체(Arguments objects)
+
+함수의 `arguments`객체는 함수의 형식 매개변수와 연결되어 있다. `argument` 객체의 숫자 인덱스 속성과 함수의 형식 매개변수 사이에는 동적 매핑이 있다. `arguments` 객체 속성의 변경은 상응하는 형식 매개변수의 값을 변경하며, 형식 매개변수를 변경하면 그 위치에 대응되는 `arguments` 객체 속성의 변경을 관찰할 수 있다.
+
+```js
+f(1, 2);
+
+function f(argA, argB) {
+    alert(argA); // displays : 1
+    alert(f.arguments[0]); // displays : 1
+    f.arguments[0] = "one";
+    alert(argA); // displays : one
+    argB = "two";
+    alert(f.arguments[1]); // displays : two
+    alert(f.arguments.argB); // displays : two
+}
+```
+
+위 코드 예제의 마지막 줄에서 볼 수 있듯이 `arguments` 객체의 속성 키에 형식 매개변수 이름을 넣음으로써 해당 형식 매개변수에 접근할 수 있다. 예를 들어서 `f.arguments.argB`는 해당 함수의 `argB` 매개변수에 접근한다.
+
+개념적으로 함수가 호출되면 함수의 새로운 동작을 위해 새로운 `arguments` 객체가 생성되고 함수 객체의 `arguments` 속성 값이 그 새로운 `arguments` 객체로 설정된다. 하지만 자바스크립트 1.0/1.1에서는 함수 객체와 `arguments` 객체가 동일한 객체이다.
+
+```js
+function f(a, b) {
+    if (f == f.arguments) alert("f and f.arguments are the same object")
+}
+if (f.arguments == null) alert("but only while a call to f is active")
+```
+
+이상적으로는 함수의 `arguments` 객체는 해당 함수의 본문 내에서만 접근 가능해야 한다. 이는 함수가 반환될 때 자동으로 `arguments` 속성을 `null`로 설정함으로써 부분적으로 강제된다. 하지만 `f1`과 `f2`라는 두 함수가 있다고 가정해 보자. `f1`이 `f2`를 호출하면 `f2`의 함수 본문에서는 `f1.arguments`을 통해 `f1`의 인자들에 접근할 수 있다.
+
+`arguments` 객체에는 `caller`라는 속성도 있다. `caller`속성의 값은 현재 함수를 호출한 함수 객체이거나 만약 가장 바깥쪽 즉 전역에서 호출되었을 경우 `null`이다. `caller`와 `arguments`를 사용함으로써 어떤 함수든 현재 콜스택에 있는 함수들과 그들의 인자들을 검사할 수 있다. 그리고 심지어 콜스택에 있는 함수들의 형식 매개변수 값을 수정할 수도 있다. 같은 의미의 `caller` 속성은 `arguments` 객체를 거치지 않고 함수 객체를 통해 직접 접근할 수도 있다.
+
+### 3.7.6. 숫자 속성 키의 특별 취급(Special Treatment of Numeric Property Keys)
+
+Javascript 1.0에서 대괄호 표기법은 숫자 키와 함께 쓰였을 경우 특이한 의미를 가졌다. 어떤 경우 대괄호로 둘러싸인 정수 키는 객체 속성이 생성된 순서대로 속성에 접근했다. 정수를 통해서 속성이 생성된 순서에 따라 속성에 접근하게 되는 것은 해당 키를 가진 속성이 객체에 존재하지 않고 정수의 값 n이 객체 속성의 총 개수보다 작은 경우에만 발생한다. 그럴 경우 `객체[n]`과 같이 숫자 키로 속성에 접근하면 그 객체에 생성된 n번째 속성(0부터 시작)에 접근하게 된다. 예를 들어 다음과 같은 코드가 있다고 하자.
+
+```js
+var a = new Object ; // or new Array
+a[0] = " zero ";
+a[1] = " one";
+a.p1 = "two";
+
+alert (a [2]) ; // displays : two
+a[2] = "2";
+alert (a.p1) ; // displays : 2
+```
+
+Javascript 1.1에서는 이런 대괄호 표기법의 특이한 동작을 제거했다.
+
+### 3.7.7. 원시값의 속성(Properties of Primitive Values)
+
+Javascript 1.0에서 숫자형과 불린값은 속성을 갖지 않았다. 그리고 그 값들의 속성에 접근하거나 속성을 지정하려고 하면 에러 메시지가 발생했다. 문자열 값은 속성을 가진 객체처럼 동작하지만, 읽기 전용인 `length` 속성을 제외하고는 모두 동일한 속성을 공유합니다. 다음과 같은 코드를 보면 그걸 알 수 있다.
+
+```js
+"xyz".prop = 42; // Set the value of property prop to 42 for all strings
+alert("xyz".prop); // displays : 42
+alert("abc".prop); // displays : 42
+```
+
+Javascript 1.1에서는 숫자, 불린, 문자열 값에 대한 속성 접근이나 할당은 내장된 `Number`, `Boolean`, `String` 생성자를 이용해 암시적으로 "래퍼 객체(wrapper object)"를 만들도록 한다. 이 속성 접근은 래퍼 객체에 수행된다. 그리고 일반적으로 내장 프로토타입에서 상속받은 속성에 접근한다. `valueOf`와 `toString` 메서드의 자동 호출로 이루어지는 형변환은 대부분의 상황에서 래퍼 객체를 원시값처럼 사용할 수 있게 한다. 할당을 통해 래퍼 객체에 새로운 속성을 만들 수는 있지만, 암시적으로 생성된 래퍼는 일반적으로 할당 직후에는 접근할 수 없게 된다. 예를 들어 다음과 같은 코드를 보자.
+
+```js
+" xyz".prop = 42; // Set the value of a String wrapper property to 42
+alert("xyz".prop); // Implicitly creates another wrapper , displays: undefined
+var abc = new String("abc"); // Explicitly create a wrapper object
+alert(abc + "xyz"); // Implicitly converts wrapper to string , displays: abcxyz
+abc.prop = 42; // create a property on a wrapper objects
+alert(abc.prop); // display: 42
+```
+
+### 3.7.8. Javascript 내부의 HTML 주석(HTML Comments Inside JavaScript)
+
+넷스케이프 2에서는 Javascript의 잠재적인 상호 운용성 문제가 있었다. 이는 넷스케이프 1과 모자이크 브라우저가 HTML의 `<script>` 요소를 만났을 때 어떻게 했는지와 관련이 있었다. 구식이지만 널리 사용되던 이런 브라우저들은 Javascript 코드를 담은 `<script>` 요소를 만나면 해당 요소의 본문을 웹 페이지에 일반 텍스트로 표시했다. 이런 구식 브라우저들에서 발생하던 문제는 HTML 주석[^21]으로 스크립트 본문을 감싸는 것으로 방지할 수 있었다. 예를 들어 이런 식으로 말이다.
+
+```html
+<script>
+<!-- This is an HTML comment surrounding a script body
+alert("this is a message from JavaScript"); // not visible to old browsers
+// the following line ends the HTML comment
+-->
+</script>
+```
+
+이런 코딩 패턴을 사용하면 넷스케이프 1과 모자이크의 HTML 파서는 전체 스크립트 본문을 HTML 주석으로 인식하고 페이지에 표시하지 않았다. 하지만 모카가 처음 구현되었을 때 이런 패턴을 사용하면 브라우저가 스크립트 본문을 파싱하고 실행하지 못했다. HTML 주석 구분자가 Javascript 코드에서 문법적으로 유효하지 않았기 때문이다. 이 문제를 피하기 위해 브랜던 아이크는 Javascript 1.0에서 `<!--`가 한 줄 주석의 시작으로 인식되도록 했다. 이는 `//`와 동일하다. 하지만 `-->`는 Javascript 주석의 구분자로 만들지 않았다. 이 패턴을 사용할 때 `-->`의 앞에 `//`를 두는 것으로 충분했기 때문이다. 그래서 하위 호환성이 있는 스크립트는 다음과 같이 작성할 수 있었다.
+
+```html
+<script>
+   <!-- This is an HTML comment in old browsers and a JS single line comment
+   alert("this is a message from JavaScript"); // not visible to old browsers
+   // the following line ends the HTML comment and is a JS single line comment
+   // -->
+</script>
+```
+
+`<!--`주석은 공식 Javascript 문법에 문서화되지는 않았다. 하지만 많은 웹 개발자가 사용하였고 다른 브라우저들의 Javascript 구현에서 지원되었다. 그 결과로 `<!--` 는 웹 현실(Web Reality$^{g}$)의 사실상의 표준이 되었다. 그래서 20년이 걸렸지만 2015년에 `<!--`주석은 ECMAScript 표준에 추가되었다. 결국 실질적으로 쓰이는 게 언제나 승리한다.
+
+# 4. Microsoft JScript[^22]
+
