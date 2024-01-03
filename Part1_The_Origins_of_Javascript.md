@@ -489,10 +489,10 @@ alert(abc.prop); // display: 42
 
 ```html
 <script>
-<!-- This is an HTML comment surrounding a script body
-alert("this is a message from JavaScript"); // not visible to old browsers
-// the following line ends the HTML comment
--->
+  <!-- This is an HTML comment surrounding a script body
+  alert("this is a message from JavaScript"); // not visible to old browsers
+  // the following line ends the HTML comment
+  -->
 </script>
 ```
 
@@ -500,10 +500,10 @@ alert("this is a message from JavaScript"); // not visible to old browsers
 
 ```html
 <script>
-   <!-- This is an HTML comment in old browsers and a JS single line comment
-   alert("this is a message from JavaScript"); // not visible to old browsers
-   // the following line ends the HTML comment and is a JS single line comment
-   // -->
+  <!-- This is an HTML comment in old browsers and a JS single line comment
+  alert("this is a message from JavaScript"); // not visible to old browsers
+  // the following line ends the HTML comment and is a JS single line comment
+  // -->
 </script>
 ```
 
