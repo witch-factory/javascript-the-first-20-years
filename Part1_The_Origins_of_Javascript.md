@@ -641,3 +641,5 @@ Javascript 1.2에서는 여러 변경사항들이 있었는데, 이렇게 Javasc
 Javascript는 출시 극초기부터 매우 큰 비판의 대상이 되어왔다. 일부 비판은 동적 타입의 사용과 같은 설계상의 근본적인 결정이나 강제 형변환 규칙과 같은 설계 세부 사항들을 대상으로 했다. 다른 비판자들은 Javascript가 HTML과 통합되는 방식에 근본적으로 동의하지 않기도 했고, 브라우저 보안 취약점의 노출에 대해서 우려하기도 했다[Fair 1998]. 로버트 카이유[Wikinews 2007]은 Javascript를 "컴퓨팅 역사상 가장 끔찍하게 나쁜 설계"라고 하면서 "나는 C보다 나쁜 언어를 딱 하나 알고 있는데 그것은 Javascript다"(“I know only one programming language worse than C and that is Javascript[sic].”) 라고 말했다. 브랫 보스[Boss 2005]는 W3C 워크숍에서 Javascript를 "지금까지 만들어진 최악의 언어"라고 했다.
 
 많은 초보 프로그래머들이 브라우저에서의 Javascript를 하면서 부동 소수점 연산상의 어려움과 같은 일반적인 프로그래밍에서의 문제들을 처음 접하게 된다. 그들은 일반적으로 이런 문제들이 Javascript에서만 나타나는 거라고 생각한다. 그리고 많은 숙련된 프로그래머들은 Javascript를 친숙한 프로그래밍 언어들과(또는 이름을 헷갈려서 Java와) 비교하고 부족하다고 여긴다. Javascript의 기이한 점들(quirks)을 카탈로그화하는 기사들[Cardy 2011]과 `wtfjs.com`[Leroux 2010]과 같은 웹사이트는 웹의 주요한 요소가 되었다.
+
+[^29]: `__proto__` 유사 프로퍼티는 Self 언어의 parent 슬롯과 비슷하다.
