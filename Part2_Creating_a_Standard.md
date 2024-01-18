@@ -273,3 +273,7 @@ Waldemar Horwat는 클로저 생성의 오버헤드에 대한 우려를 가지�
 [^41]: 부속 문서 B(Annex B)는 ES3 명세의 부록으로, 구식 ECMAScript 기능의 정의를 제공한다.
 
 # 13. 막간: Javascript는 Java가 필요 없다(Interlude: Javascript Doesn't Need Java)
+
+원래 Javascript는 Java를 보조하는 스크립팅 언어로 구상되었다. 그리고 모든 복잡한 프로그래밍 작업들은 Java를 사용해서 수행될 걸로 예상되었다. 하지만 Javascript 경험이 쌓이면서 웹 개발자들은 그들이 진짜로 필요했던 게 Javascript라는 것을 깨닫기 시작했다.
+
+## 13.1. Javascript 전도사(The Evangelist)
