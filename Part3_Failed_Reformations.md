@@ -102,5 +102,24 @@ ECMAScript 3판의 컴팩트 프로파일(compact profile)프로젝트라는 게
 
 2002년, TC39-TG1은 'XML용 ECMAScript' 명세를 개발하는 것에 대부분의 관심을 집중했다. E4X는 ES3에 XML 문서 처리를 지원하는 문법 확장을 추가한 별도의 Ecma 표준이었다. ECMA-357 [Ecma International 2004; Schneider et al. 2005]의 판들은 2004년과 2005년에 발행되었다. E4X는 파이어폭스에서 유일하게 구현되었다. 그리고 브라우저 게임 이론에 따라서 E4X는 거의 사용되지 않았다. ECMA-357은 ECMAScript 2015와 호환되지 않았기 때문에 ECMA-357은 2015년 Ecma 표준에서 철회되었다[Ecma International 2015b].
 
+[^59]: NetObjects는 IBM이 투자한 스타트업이었다.
+
+[^60]: 당시의 휴대폰은 매우 제한적인 프로세서, 메모리, 그리고 통신 대역폭 자원만을 가지고 있었다.
+
 # 17. 플래시와 액션스크립트(Flash and ActionScript)
 
+Macromedia의 Flash<sup>g</sup>는 2000년대 초반 다채로운 인터넷 애플리케이션을 구축하기 위한 Java와 Javascript의 인기있는 대안으로 등장하였다. Flash는 이후 Adobe에 인수된다. Flash는 원래 Jonathan Gay [2006]의 작업을 바탕으로 한 타임라인 기반의 애니메이션 제품이었다. Flash는 애니메이션 기반의 애플리케이션을 바이너리 파일로 컴파일하는 시각적 저작 도구로 구성되어 있다. 이 이진 파일은 Flash Player에 의해 해석된다. 플레이어 구성 요소는 브라우저의 플러그인 확장 API를 사용하여 브라우저에 통합되었다. Flash가 가장 잘나갈 때는 거의 모든 브라우저 사용자가 Flash Player를 설치하였다[Adobe 2013].
+
+초기의 Flash 저작물은 주로 시각적인 것들이었다. 하지만 Flash에는 다양한 타임라인 이벤트에 어떻게 반응할지를 정의하는 간단한 텍스트 형식의 "액션"을 작성할 수 있는 기능도 있었다. 1999년 5월에 출시된 Flash 버전 4에서 Gary Grossman은 Flash의 액션을 JavaScript와 문법적 유사성을 가진 간단한 동적 타입 스크립팅 언어로 발전시켰다. 2000년 Flash 5의 출시와 함께 Flash에 들어간 스크립팅 언어는 ECMAScript 3의 방언이 되었고 "ActionScript"로 이름지어졌다. ActionScript<sup>g</sup> 1.0은 대부분의 ES3 문장 형식과 프로토타입 기반의 객체를 지원했다. 하지만 정규 표현식 지원이 없었고, 변수 접근에 대한 제한된 표현식만 평가할 수 있는 비표준 `eval`함수를 가지고 있었으며 그 외에도 여러 가지 미묘한 시맨틱 차이가 있었다. ActionScropt 코드는 Flash Player 환경에서만 실행되도록 컴파일되었기 때문에, ECMAScript 명세에 대한 엄격한 의미적 준수는 중요한 문제가 아니었다. 예를 들어서 Action 1.0에서 `var` 선언은 선언을 감싸는 함수가 아닌 가장 가까운 블록에 범위가 지정되었다.
+
+ActionScript 2.0은 2003년 Flash MX 개발 환경과 Flash Player 6의 구성 요소로 도입되었다. ActionScript 2.0은 ActionScript 1.0에서 클래스 선언, 인터페이스 선언, 선언에 대한 타입 어노테이션, 그리고 다른 스크립트에서 정의된 클래스에 접근하기 위한 import 문을 확장했다. 클래스 어노테이션, 클래스 선언, 인터페이서 선언에 관한 문법은 ES4_1/JS2 명세와 대략적으로 비슷하다. 하지만 훨씬 단순화된 시맨틱을 가지고 있었다. 타입 어노테이션 사용은 선택적이었다. 타입 검사는 "컴파일 시에만 작동하는 기능(a compile-time-only feature)"이었다[Macromedia 2003]. 타입 어노테이션이 있으면 Java와 비슷한 이름 기반의 타입 검사가 컴파일 타임에 수행되었다. 코드가 생성되기 전에 타입 정보는 제거되었다. ActionScript 2.0은 ActionScript 1.0과 동일한 가상 머신을 사용하며 기본적인 런타임 안전 검사를 수행한다. 프로그램은 런타임 안전 검사를 트리거하는 동작을 하지 않는 한 이름 기반 타입 시스템의 규칙을 위반하는 방식으로 객체를 동적으로 수정할 수 있다.
+
+2003년 Flash가 웹 개발에 널리 사용되었고 이는 대규모의 복잡한 ActionScript 어플리케이션 생성으로 이어졌다. 그 중 일부는 성능 문제에 직면했다. 당시의 대부분의 ECMAScript 언어 설계자들과 구현자들처럼, Macromedia 팀은 동적 타이핑(특히 원시 타입의 경우)이 주된 성능 병목이라고 믿었다[^61]. 그리고 ActionScript 런타임에 정적 타이핑을 추가하는 방법을 모색하고 있었다. 비슷한 시기에 1998년부터 TC39 대표였던 Jeff Dyer가 Macromedia에 합류했다. Dyer는 TC39도 정적 타이핑에 대해 같은 관점을 가지고 있음을 확인해 주었다. 가상 머신 기반 언어에서의 정적 타이핑에 대한 이 널리 공유된 견해는 정적 타입의 Java 가상 머신(JVM)의 설계에 크게 영향을 받았다. Jonathan Gay와 Lee Thornason의 Maelstrom 프로젝트는 JVM이 Flash에 통합되어 ActionScript의 정적 타입 버전 런타임으로 사용될 수 있는지를 보기 위한 Macromedia의 실험이었다. 이 실험은 충분히 성공적이었다. 그래서 Macromedia는 Flash에서 Java 2 Micro Edition (J2ME)를 사용하는 걸 허가받기 위해 Sun에 접근했다. Flash 웹 다운로드에 포함시키기에는 Java 런타임 표준 에디션이 너무 컸기 때문에 Macromedia는 J2ME를 사용하고자 했다. 하지만 Macromedia의 Java Micro Edition 기술 사용 제안은 Sun의 Java 라이선스 전략과 일치하지 않았다. Edwin Smith는 비밀 프로젝트에서 아이디어 컨셉을 증명하기 위한 가상 머신들을 만들었다. 이 가상 머신들은 Macromedia가 정적 타입 JVM과 비슷한 가상 머신 AVM2[Adobe 2007]를 자체적으로 제작하고 ActionScript가 그 위에서 동작하게 하도록 만드는 데에 도움이 되었다. 새 언어는 Gary Grossman, Jeff Dyer, Edwin Smith에 의해 설계되었고, Horwat의 초안 ES4_1/JS2 명세에 크게 영향을 받았다. 하지만 JScript.Net과 마찬가지로 ActionScript 3.0은 ES4_1의 설계를 단순화한 것이었다. ActionScript 3.0은 JS2보다 덜 동적이었고 JScript.NET과 달리 .NET 타입 모델에 의해 제약받지 않았다. ActionScript 3.0은 JScript.Net과 유사하게 기존 호환성 문제에 크게 구애받지 않았다. Flash는 ActionScriot 3.0을 지원하기 위한 AVM2와 ActionScript 1.0과 2.0을 지원하기 위한 AVM1을 함께 출시했다. 이렇게 새로운 버전의 ActionScript와 새로운 가상 머신을 만드는 데는 3년 이상의 시간이 걸렸다. 이것은 2006년 Flash Player 9의 구성 요소로 발표되었으며, 2007년에 최종적으로 출시되었다. 이 활동이 완료될 무렵 Adobe가 Macromedia를 인수했고 Flash는 Adobe Flash가 되었다.
+
+[^61]: Macromedia 내부에서의 믿음과 행동들에 대한 설명은 2017-2018년의 Jeff Dyer, Gary Grossman과의 개인적인 대화에서 얻은 것이다.
+
+# 18. ES4, 2 테이크(ES4, Take 2)
+
+ES4_1 작업은 2003년에 정체되었지만, 웹 상에서 JavaScript의 사용은 계속해서 증가하고 있었다. 1년도 되지 않아서 TG1 구성원들은 그들이 "ES4"라고 부르는 새로운 버전의 ECMAScript를 설계하는 것에 대해 다시 생각하고 있었다.
+
+## 18.1. TC39-TG1 다시 만들기(Resetting TC39-TG1)
