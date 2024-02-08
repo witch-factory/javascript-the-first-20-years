@@ -196,5 +196,24 @@ Dave Herman은 Brendan Eich가 Herman의 웹 페이지를 발견한 후 TG1에 �
 
 [^67]: TC39의 비공개 위키는 결국 `wiki.ecmascript.org` [TC39 2007]로 공개되었다.
 
+## 18.3. 반발(Resistance)
 
+Microsoft는 ES4_2에 대한 다시 시작된 노력에 최소한으로만 관여했다. Microsoft의 개발 부서(DevDiv)는 Internet Explorer를 담당하는 Microsoft Windows 조직과 거리가 멀었음에도 불구하고 항상 JScript 개발을 담당해 왔다. 2000년대 초, DevDiv는 .NET 에 관한 계획을 지원하기 위해 재편되었다. 거기의 C# 제품 유닛은 JScript.NET과 Internet Explorer 내에서 사용되는 더 전통적인 JScript 엔진 둘 모두를 책임지게 되었다. 여기에는 ECMAScript 표준화 활동에 참여하는 책임도 포함되었다. 그러나 고객들은 JScript.NET을 별로 도입하지 않았고 Windows 조직은 Internet Explorer를 개선하는 데 별 관심이 없었다. 그래서 JScript/ECMAScript 작업은 C# 그룹 내에서 우선 순위가 낮은 활동이었다.
 
+2000년대에, Microsoft는 전략적으로 중요한 개발 활동을 주로 워싱턴 주 레드몬드 본사에 배치하고 종종 더 전술적인 프로젝트를 전 세계 다른 캠퍼스에 배치했다. 2005년 7월부터 2006년 6월까지 그러니까 회계 년도로 2006년에, Microsoft DevDiv는 모든 JScript/ECMAScript 작업을 인도 하이데라바드에 있는 인도 개발 센터(IDC)로 이전하기로 결정했다. DevDiv는 이전에 Java와 유사한 J#.NET 제품에 대한 책임을 IDC에 이관했다 [Prasanna 2002]. 2006년 봄까지 이관 작업은 대부분 완료되었다. TG1에서 Microsoft를 대표하는 업무는 Pratap Lakshman에게 주어졌다. 그는 J#팀에서 일했었으며 Ecma C# 표준 작업 그룹인 TC39-TG3에도 관여했었다. Lakshman은 2006년 4월에 처음으로 TG1 회의에 원격으로 참여했으며, 이후 전화 회의와 일부 대면 회의에 참석하기 시작했다. 하지만 그 기간 동안 그가 ES4_2에 주요한 기여를 한 건 아니었다.
+
+이 문서의 저자 중 하나인 Allen Wirfs-Brock은 2003년 마이크로소프트에 소프트웨어 아키텍트로 합류했다. 그리고 새로운 IDE 아키텍처를 조사하는 실험적인 프로젝트에 참여했다. 마이크로소프트에 합류하기 전, 그는 20년 동안 Smalltalk 프로그래밍 언어와 개발 환경에 깊이 관여했다. Wirfs-Brock은 최초의 상용 Smalltalk 가상 머신 구현 중 하나의 리드 개발자였고[Caudill and Wirfs-Brock 1986] 대규모 프로그래밍을 지원하기 위한 Smalltalk 개선 작업을 수행했다. 또 그는 표준 Smalltalk 예외 핸들링 시스템을 설계했고, ANSI Smalltalk 표준 [ANSI X3J20 1998]의 언어 정의 부분을 작성했다.
+
+2006년 말경 IDE 프로젝트가 점차 마무리되어 가면서 Wirfs-Brock은 새로운 기회를 모색하기 시작하였다. 당시 DevDiv 내에서는 동적 언어에 대한 관심이 증가하고 있었다. 당시 DevDiv에는 동적 언어를 담당하는 특정 부서가 없었기 때문에 여러 제품 부서의 관리자들이 동적 언어와 관련된 작업을 하려고 경쟁하고 있었다. Wirfs-Brock은 Visual Basic 제품 부서 매니저 Julia Liuson에게 보고하는 스태프 아키텍트 직책을 맡았다. Julia에게 동적 언어 기술과 그 가능성에 대해서 조언하는 일이었다.
+
+Allen Wirfs-Brock은 2007년 1월 첫 주에 새로운 직무를 시작하였다. 일상적인 대화 중, Liuson은 그에게 JavaScript에 대한 지식이 있는지 물었다. Wirfs-Brock은 대략 이런 식으로 대답했다. '별로요. 웹 페이지에서 사용되는 동적 언어인데 Self와 약간 관련이 있다고 생각합니다.' 이에 Liuson은 자신이 방금 받은 이메일 메시지를 보여주며 그의 의견을 물었다.
+
+그 메시지는 Pratap Lakshman이 모든 DevDiv 제품 부서 관리자들에게 보낸 것이었다. Ecma TC39가 개발 중인 새로운 JavaScript 표준에 대해 어떤 입장을 취해야 할지에 대한 지침을 묻는 내용이었다. Wirfs-Brock의 기억에 따르면, Lakshman의 메시지는 새 표준이 Adobe Flash를 기반으로 하며, 당시 브라우저 생태계에 상당한 변화가 될 것이라고 하고 있었다. Lakshman은 TC39가 개발 중인 언어는 강력하지만 웹에는 너무 복잡할 가능성이 있다고 언급했다. 그는 클래스 기반의 정적 타이핑, 구조적 타입, 매개변수화된 타입, 메소드 오버로딩 등 새로운 기능과 변경 사항의 긴 목록을 나열했다. 또한 새로운 언어는 Standard ML로 작성된 참조 구현을 통해 명세될 것이라고 밝혔다.
+
+Allen Wirfs-Brock은 Julia Liuson에게 이것이 완전한 재설계처럼 들린다고 응답했으며, 그의 경험에 따르면 정적 타입을 추가하여 동적 언어를 개선하려는 시도는 드물게 성공한다고 말했다. 그는 JavaScript나 웹 개발에 대해 충분히 알지 못해서 더 확실하게 말할 수는 없었다. 하지만 이를 추가적으로 연구할 것을 제안했다.
+
+Wirfs-Brock은 며칠 동안 Javascript, 기존의 ES3 명세, 공개 위키 스냅샷에 있는 TG1에서의 제안들[TC39 ES4 2007f]을 보았다. 그는 Lakshman과 인터넷 익스플로러 팀의 소프트웨어 아키텍트들, 웹 기반 애플리케이션 작업을 하는 마이크로소프트 엔지니어들과 대화를 나누었다. 그는 Javascript가 웹 상에서 수행하고 있는 역할은 Richard Gabriel의 [1990] "[Worse Is Better](https://typefully.com/dylayed/rise-of-worse-is-better-dxcVfbU)" 개념의 주요한 사례라는 걸 인식했다. Javascript는 미니멀리즘적으로 만들어져서 조금씩 성장했고 이것이 월드 와이드 웹의 구조에 깊게 뿌리내린 상태였다. 반면 ES4_2 관련 활동은 Wirfs-Brock이 보기에, Gabriel의 표현으로는 "do the Right Thing"철학을 따르는 프로젝트로 보였다. 이는 성과를 내기 힘들어 보였고 성공한다 해도 웹에 큰 혼란을 일으킬 가능성이 높았다. 그는 기술적으로 보았을 때 ECMAScript의 발전 방향을 점진적인 개선으로 되돌리려고 시도하는 게 옳다고 결론지었다.
+
+당시 마이크로소프트가 웹 브라우저 기술에 대한 전략적인 관심이 부족했음을 고려할 때 Wirfs-Brock은 DevDiv 경영진이 웹 브라우저 관련 활동에 자원을 할당하는 데 관심이 있을 가능성이 낮다고 생각했다. 그는 DevDiv 내부의 관심을 얻기 위해서는 ES_4가 성공했을 때 가능한 결과들에 초점을 맞추어야 한다고 결정했다. 그가 식별한 주요 우려 사항은 ActionScript 3 언어 정의와 가상 머신을 통해서 Adobe가 ES4_2 활동에 기여한 것이었다. DevDiv의 초점은 .NET 플랫폼과 그 플래그십 언어인 C#에 있었으며, 그 주요 고객은 엔터프라이즈 애플리케이션 개발자였다. .NET의 주요 경쟁자는 Sun의 Java 플랫폼이었지만, DevDiv는 Adobe의 ActionScript 기반 Flash와 Flex 제품도 .NET의 경쟁자로 보기 시작했다. Wirfs-Brock은 성공적인 ES4_2 활동이 ActionScript를 C#이나 Java와 같은 힘과 유용성을 갖춘 1급 엔터프라이즈 언어로 변모시킬 수 있을 것으로 예상했다. ActionScript가 웹 개발의 주요 언어로 표준화되면 마이크로소프트의 언어들과 개발자 제품군에 대한 심각한 경쟁 위협이 될 수 있었다.
+
+Allen Wirfs-Brock은 이러한 우려와, 마이크로소프트가 TG1에 적극적으로 참여하여 ECMAScript 표준을 파괴적이지 않고 점진적으로 발전시키는 방향으로 전환하려고 시도할 것을 권고하는 내용을 담은 메모를 작성했다. 1월 중순에 그 권고가 수용되었고 Wirfs-Brock은 그것을 수행할 책임을 맡게 되었다. 2007년 1월 18일, Pratap Lakshman은 TG1 사설 메일링 리스트 [TC39 2003]에 메시지를 게시하여 Wirfs-Brock을 TG1의 새로운 마이크로소프트 대표자로 소개했다.
