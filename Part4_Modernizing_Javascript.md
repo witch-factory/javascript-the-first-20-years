@@ -1061,3 +1061,92 @@ ES6 개발 과정에서 TC39에 의해 고려되었고 최종적으로 ES2015에
 **Guards** [Miller 2010c] 선언에 대한 타입 비슷한 주석으로, 동적으로 검증될 것이었다.
 
 ## 21.4 Harmony 트랜스파일러(Harmony Transpilers)
+
+트랜스파일러는 Harmony 기능들의 개발, 테스팅, 커뮤니티의 사회화에 중요한 역할을 했다. 트랜스파일러는 표준이 완성되거나 브라우저에서 완전히 지원되기 전에 표준에서 도입한 새로운 기능을 프로덕션 환경에서 사용할 수 있게 했다. 트랜스파일러는 Javascript 개발자 커뮤니티에서 ES2015를 빠르게 도입하게 하는 데에 핵심적인 역할을 했다. Harmony를 지원하는 중요한 트랜스파일러는 다음과 같았다.
+
+**Narcissus** [Eich et al. 2012]는 Mozilla Research가 ES6 언어의 실험에 사용한 JavaScript 엔진으로, JavaScript로 호스팅되었다.
+
+**Traceur** [Hallam and Russell 2011; Traceur Project 2011a]는 Google에서 개발하고 초기 ES6 기능을 실험하는 데 사용된 트랜스파일러였다. Traceur는 ES6 시맨틱을 충실하게 구현했지만 결과적인 런타임 오버헤드는 프로덕션 환경에서의 사용에 부적합했다.
+
+**Babel** [2015]는 원래 6to5로 명명되었고 호주 농촌 지역에 사는 당시 17세였던 개발자 Sebastian McKenzie에 의해 개발되었다. "2014년 9월 28일 나는 고등학교 시험 공부를 하면서 작업하고 있던 Javascript 라이브러리에 대한 내 첫 번째 커밋을 GitHub에 푸시했다." [McKenzie 2016] Babel은 초안 명세에 대한 완전한 시맨틱 준수를 희생함으로써 런타임 오버헤드를 최소화했다. Babel은 ES2015 기능과 다른 실험적인 Javascript 기능에 대한 얼리 액세스를 제공함으로써 ES5만 지원하는 오래된 브라우저 혹은 플랫폼에서 대부분의 ES2015 수준 Javascript 코드를 실행할 수 있게 했다. 그러나 Babel을 사용하는 일부 개발자들은 실험적인 기능, 잘못된 시맨틱, 혹은 나중에 표준 ECMAScript 기능이 되는 것의 구식 변형에 의존하게 되었다. 이는 네이티브 구현으로의 전환을 더 어렵게 만들고 몇몇 경우에는 TC39의 설계 유연성을 제한하는 레거시를 만들어냈다.
+
+**TypeScript**[Microsoft 2019]는 Microsoft의 무료 언어 제품이다. 원래는 ES5와 ES6+를 대상으로 했고 나중에 ES2015를 컴파일 대상으로 추가했다. TypeScript의 가장 중요한 기능은 선택적으로 정적 분석 가능한 타입 시스템과 타입 어노테이션이며, 이는 자연스러운 동적 타입 Javascript 코드로 컴파일된다. 2020년, TypeScript는 타입 어노테이션이 달린 Javascript를 작성하기 위한 사실상의 표준이다 [Greif and Benitte 2019].
+
+트랜스파일러 그 중에서도 특히 Babel과 Typescript를 프로덕션 환경에서 사용하는 것은 많은 Javascript 개발 팀 내의 커다란 문화적 변화의 일부였다. 그런 팀들에서 Javascript는 프로그래머의 원본 소스 코드를 로드하고 직접 실행하는 동적 실행 환경으로 다루어지지 않았다. 그보다는 개발 및 배포 빌드 툴체인을 갖추고 있는 전통적인 사전(ahead-of-time) 컴파일 언어와 비슷하게 취급되었다. 
+
+## 21.5 ECMAScript 2015 마침(Finishing ECMAScript 2015)
+
+![그림 47](./pictures/figure47.png)
+
+![그림 48](./pictures/figure48.png)
+
+2015년 3월 회의에서, TC39 [2015b]는 당시의 후보 명세 [Wirfs-Brock et al. 2015b,c]을 승인하고 Ecma 총회에 최종 승인을 요청했다. Ecma 총회는 2015년 6월 회의에서 투표를 통해 이를 수락 [Ecma International 2015a]했다. 그리고 즉시 ECMA-262, 제6판, "ECMAScript 2015 언어 명세[^100]" [Wirfs-Brock 2015a]을 발행했다.
+
+ECMAScript 2015를 개발하고 출시하기까지 거의 7년이 걸렸으며, 그 개발에는 수백 명의 사람들이 기여했다. 2008년 7월 회의(여기서 Harmony 노력이 시작됨)부터 2015년 3월 회의(후보 사양이 승인된 곳)까지 41차례의 TC39 회의가 있었다. 이 회의에는 145명의 사람들이 직접 혹은 전화상으로 참여했으며 참여 빈도는 다양했다. ES2015 개발은 ES5/ES5.1, ECMA-402 ECMAScript 국제화 API, ECMA-404 JSON 교환 형식, 그리고 Test262 검증 테스트 스위트의 개발과 겹치는 부분이 있었다. 일부 참여자들은 이러한 노력 중 하나 혹은 그 이상에 주요하게 관심을 가지고 있었따. 145명의 회의 참석자 중 62명은 단 한 번만 회의에 참석했으며 일반적으로 관찰자로서 참여했다.
+
+TC39 의장 John Neumann과 Ecma 사무총장 István Sebestyén은 행정적 지원을 제공하고 회의가 원활하게 진행되도록 보장했다. 프로젝트 편집자인 Allen Wirfs-Brock은 프로젝트 기간 동안 명세의 38개 초안 [TC39 Harmony 2015]을 발표했다. 7명(그림 47)이 사실상 전체 프로젝트에 걸친 기술 기여자였다. 추가로 35명의 참가자들(그림 48)은 5회에서 24회 사이로 회의에 참여했으며 대부분이 프로젝트에서 중요한 기술적 기여를 했다. ES2015 개발 과정에서 수백 명의 Javascript 개발자 커뮤니티 멤버들이 `es-discuss` 메일링 리스트[TC39 et al. 2006]에 36,000개 이상의 메시지를 게시했다. TC39 버그 추적 시스템에는 ES2015 명세 초안과 관련된 4,000개 이상의 티켓이 열렸다.
+
+ES6의 개발 동안 TC39에 대한 관심도와 참여가 급격하게 증가했으며 그 관심은 완성 후에도 지속되었다. 2008년 7월에 열린 TC39의 첫 번째 Harmony 회의는 8개의 조직을 대표하는 13명의 개인 참가자들만이 참석했다. ES2015가 발행된 지 한 달 후인 2015년 7월의 회의에는 15개의 조직을 대표하는 34명의 참가자들(일부는 원격)이 있었다. 2019년 7월의 TC39 회의에는 24개의 조직을 대표하는 76명의 참가자들(현장 46명, 원격 30명)이 있었다.
+
+### 21.5.1 ES6 이후의 미래를 대비하기(Preparing for the post-ES6 future)
+
+2013년과 2014년에 ES6 개발의 끝이 다가오면서 TC39는 향후 판들의 개발이 어떻게 진행되어야 할지 고려하기 시작했다. ES6 프로세스에 대한 한 가지 우려는 일부 기능의 설계가 발행된 ECMAScript 표준에 나타나기 몇 년도 더 전부터 완료되었다는 점이었다. 이는 대부분의 주요 브라우저 개발자들이 채택하고 있던 "evergreen browsers" 개념과 상충되었다. evergreen browser는 몇 주마다 업데이트되어 버그 수정과 새로운 기능을 가능한 한 빨리 제공한다. 대부분의 TC39 멤버들은 ECMAScript 표준의 더 빠른 업데이트 사이클이 필요하다고 느끼고 있었다. 브라우저의 빠른 진화와 발맞추기 위해서였다.
+
+연간 발행 주기가 제안되었다. 이를 통해 개별적인 새 기능이 표준에서 빠르게 사용 가능해질 수 있었다. 연간 릴리즈는 명세 버그를 빠르게 수정하고 다년간에 걸친 긴 정오표를 유지할 필요성을 없애도록 해줄 거였다. 연간 발행 업데이트 주기는 표준 조직의 일반적인 규칙에 비해서는 매우 빠르지만, Ecma가 수용하기로 한 일정이었다.
+
+연간 업데이트를 위해서 TC39는 새로운 언어 기능을 개발하는 방식에 있어서 더 규율을 갖추어야 했다. 일부 설계 작업은 완료하기 위해서 여전히 몇 년이 걸릴 것이다. 따라서 여러 연간 릴리즈 주기에 걸친 기능 개발 프로젝트를 수용할 수 있으며 서로 다른 기능에 대해 개발 주기가 겹칠 때 조정할 수도 있는 프로세스가 필요했다. 또한 ES6가 명세 작성의 대부분을 한 명의 편집자에게 지나치게 의존했던 것에 대한 우려도 있었다. 연간 릴리즈를 성공적으로 수행하기 위해서는 각 기능의 챔피언들이 자신의 기능에 대한 대부분의 명세 작성을 해야 했다.
+
+Rafael Weinstein과 Dimitry Lomov는 새로운 기능 제안이 다섯 단계의 성장 단계를 거치는 개발 프로세스 제안을 발표했다 [TC39 2013c; Weinstein and Lomov 2013]. 이후 Weinstein은 Allen Wirfs-Brock과 함께 프로세스를 더 정의하고 문서화하는 작업을 진행했다 [Weinstein and Wirfs-Brock 2013]. 부록 Q는 새 프로세스와 개발 단계의 설명이다. 2014년부터 TC39는 TC39의 모든 ES6 이후 활동들에 대해 이 프로세스를 따랐다. 이 문서의 2020년 6월 출판 시점까지 TC39는 매년 6월마다 ECMAScript 명세의 업데이트된 판을 성공적으로 발행했다.
+
+# 22. 결론(Conclusion)
+
+Javascript는 낮은 기대치를 가지고 만들어진 언어였다. Javascript는 원래 브라우저 내에서 Java의 조력자 역할을 하도록 의도되었고 초보 웹 페이지 개발자와 파트타임 프로그래머에게 적합하도록 만들어졌다. 하지만 얼마 지나지 않아 Javascript는 인터랙티브 웹 페이지를 위한 주요 언어로서 Java를 뛰어넘었다. Javascript의 첫 20년은 Javascript를 강화하고 개선하고 재설계하고 혹은 아예 대체하려는 실패한 시도들로 가득 차 있었지만 그러한 20년 끝에 Javascript는 끝내 세계에서 가장 널리 쓰이는 프로그래밍 언어가 되었다. 이제 그 사용은 웹페이지에만 국한되지도 않는다. Node.js와 같은 호스트를 사용하여 구축된 서버 애플리케이션 외에도 Javascript는 데스크톱 애플리케이션, 모바일 기기 애플리케이션, 피트니스 트래커, 로봇, 그리고 수많은 임베디드 시스템을 만드는 데 사용된다. Javascript는 심지어 제임스 웹 우주 망원경의 일부로도 들어갔다. 우주 망원경은 기내 제어 소프트웨어의 일부로 Nombas의 ES1 레벨 임베디드 Javascript를 사용한다[Dashevsky and Balzano 2008].
+
+Javascript의 성공은 필연적이었을까? 웹과 브라우저 게임 이론은 상호 호환성을 요구하기 때문에 하나의 지배적인 웹 페이지 프로그래밍 언어를 선호할 수도 있다. 하지만 그 언어가 Javascript여야만 하는 두드러지는 이유는 없었다. 다른 언어들도 그 역할을 할 수 있었다. 실제로 Javascript의 역사 속에는 결과가 달라졌을 수 있는 여러 지점이 있다.
+
+**만약** Marc Andreessen이 브라우저 스크립팅 언어 개발을 주장하지 않았다면?
+
+**만약** Sun의 Bill Joy가 Java에 보완재로써의 초기 Mocha 개발을 지지하지 않았다면?
+
+**만약** Mocha 개발 작업이 Brendan Eich가 아닌 다른 누군가에게 주어졌다면?
+
+**만약** Eich가 더 경험 많은 언어 설계자 혹은 구현자였고, 10일만에 데모를 만드는 것이 불가능한 작업이라고 결론지었더라면?
+
+**만약** Eich가 덜 능력있는 프로그래머이거나 너무 야심찬 언어 설계를 해서 10일 동안 Mocha 데모를 만드는 데 실패했다면?
+
+**만약** Javascript의 원래 설계가 일급 함수를 포함하지 않았다면?
+
+**만약** Sun이나 Netscape가 Java를 격리된 환경에서 호스팅하는 대신 HTML과 Java를 더 잘 통합하는 데 노력을 기울였다면?
+
+**만약** Microsoft가 JScript를 구현하지 않고 그 대신에 Visual Basic 대안을 더 강력하게 추진했다면?
+
+**만약** Microsoft가 브라우저 시장 점유율이 90%를 넘은 후에도 브라우저 언어 기술에 대한 투자를 계속했다면?
+
+**만약** ES4_2의 재설계에 참여하는 대신에 Macromedia/Adobe가 ActionScript 2나 3을 공식 브라우저 표준으로 밀어붙였다면?
+
+**만약** TC39 내에서 ES4_2에 대한 반대가 나타나지 않았다면?
+
+만약, 만약, 만약...하지만 이런 일들 중 어떤 것도 실제로 일어나지 않았다. 대신에, 때로는 심한 비판과 조롱까지 받으면서도 브라우저 구현자, 엔진 개발자, 프레임워크 설계자, 표준 기여자, 도구 제작자, 웹 애플리케이션 프로그래머들의 한 세대가 Javascript를 사용하고 향상시키는 실용적인 방법을 찾아냈다. 웹을 깨뜨리지 않으면서도 말이다.
+
+Brendan Eich는 2011년 한 컨퍼런스 토크에서 "JSLOL" [Eich 2011e]이라는 제목으로 JavaScript를 묘사했다.
+
+- 사람들은 처음에 JS가 "풍부한 인터넷 애플리케이션"을 구축하는 데 유용할 수 없다고 말했다.
+- 그 다음 사람들은 JS가 빠를 수 없다고 말했다.
+- 그 다음 사람들은 JS를 고칠 수 없다고 말했다.
+- 그 다음 사람들은 JS가 멀티코어/GPU를 활용할 수 없다고 말했다.
+- 그들은 매번 틀렸다!
+내 조언: **항상 JS에 베팅하라**
+
+**감사문**
+
+HOPL-IV 프로그램 위원회 멤버들은 이 문서 초안에 대해 방향성과 심도 있는 리뷰와 소중한 피드백을 제공했다.
+
+다음 동료들은 JavaScript와 ECMAScript의 개발에 참여했으며, 이 문서에서 논의된 사건과 기술에 대한 정보를 제공했다. Douglas Crockford, Jeff Dyer, Richard Gabriel, Bill Gibbons, Gary Grossman, Lars T. Hansen, Dave Herman, Graydon Hoare, Yehuda Katz, Shon Katzenberger, Peter Kukol, Pratrap Lakshman, Mark S. Miller, István Sebestyén, Mike Shaver, Brian Terlson, Tom Van Cutsem, Herman Venter, Rick Waldron, Robert Welland.
+
+원고를 작성하는 여러 과정에서 원고의 전체 혹은 일부에 대해 편집 피드백을 제공한 베타 리더들은 다음과 같다. Jory Burson, Douglas Crockford, Jeff Dyer, Richard Gabriel, Lars T. Hansen, Dave Herman, Pratrap Lakshman, Axel Rauschmayer, Jon Steinhart, Tom Van Cutsem, Herman Venter, Rick Waldron, Rebecca Wirfs-Brock, and Joseph Yoder.
+
+Richard Gabriel, Rebecca Wirfs-Brock, Joseph Yoder는 문서의 구조와 표현을 세밀하게 조정하기 위해 며칠 동안 종합적으로 문서를 검토했던 힘든 워크숍 세션에 참여했다.
+
+기억은 잘못되었을 수 있으므로 정확한 역사는 원본 문서에 대한 접근에 의존한다. Internet Archive와 Ecma International의 내부 아카이브는 이 문서에 필수적인 출처 자료를 제공했다. 특히 이 문서는 Ecma의 이전 사무총장인 István Sebestyén의 열정적인 지원 없이는 불가능했을 것이다. Sebestyén 박사는 우리가 Ecma 전용 아카이브에 접근할 수 있도록 보장했을 뿐만 아니라 TC39와 ECMAScript에 관련된 대부분의 Ecma 문서 아카이브가 웹을 통해 공개적으로 접근 가능해야 한다는 데 합의했다. Ecma의 Patrick Charollais는 https://www.ecma-international.org/archive/ecmascript 웹 페이지의 생성을 도왔다.
+
+마지막으로 2007년 1월에 그 이메일을 작성한 Pratrap Lakshman에게 Allen Wirfs-Brock이 감사를 표합니다. 그 이메일이 이 문서를 작성하게 된 시작이었다.
