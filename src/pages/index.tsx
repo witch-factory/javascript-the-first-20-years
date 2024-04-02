@@ -12,9 +12,7 @@ function HomepageHeader() {
   return (
     <header className={styles.heroBanner}>
       <div className='container'>
-        <Heading as='h1' className='hero__title'>
-          {`${siteConfig.title} 번역`}
-        </Heading>
+        <h1>{`${siteConfig.title} 번역`}</h1>
         <p className='hero__subtitle'>{siteConfig.tagline}</p>
       </div>
     </header>
