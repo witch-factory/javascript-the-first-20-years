@@ -4,6 +4,7 @@ import Layout from "@theme/Layout";
 import styles from "./index.module.css";
 import { articleList } from "../asset/article";
 import ArticleList from "../components/ArticleList";
+import Link from "@docusaurus/Link";
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -45,6 +46,11 @@ export default function Home(): JSX.Element {
                   items={part.items}
                 />
               ))}
+              <p>
+                번역하면서 참고한 자료는{" "}
+                <Link to='/reference'>번역에 참고한 문헌들</Link>에서 볼 수
+                있습니다.
+              </p>
             </div>
           </div>
         </section>

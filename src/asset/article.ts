@@ -44,11 +44,11 @@ export const articleList: Part[] = [
       },
       { title: "8. 첫 TC39 회의", url: "/docs/part-2/the-first-tc39-meeting" },
       {
-        title: "9. 명세 작성하기",
+        title: "9. 명세를 향한 여정",
         url: "/docs/part-2/crafting-the-specification",
       },
       {
-        title: "10. 표준 이름 정하기",
+        title: "10. 표준의 이름 정하기",
         url: "/docs/part-2/naming-the-standard",
       },
       { title: "11. ISO 패스트트랙", url: "/docs/part-2/iso-fast-track" },
@@ -94,7 +94,7 @@ export const articleList: Part[] = [
         url: "/docs/part-4/from-harmony-to-ecmascript-2015",
       },
       { title: "22. 결론", url: "/docs/part-4/conclusion" },
-      { title: "감사문", url: "/docs/part-4/acknowledgements" },
+      { title: "감사의 글", url: "/docs/part-4/acknowledgements" },
     ],
   },
 ];
