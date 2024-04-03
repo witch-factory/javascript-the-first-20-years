@@ -2,7 +2,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 
 import styles from "./index.module.css";
-import { articleList } from "./article";
+import { articleList } from "../asset/article";
 import ArticleList from "../components/ArticleList";
 
 function HomepageHeader() {
@@ -19,7 +19,6 @@ function HomepageHeader() {
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
-  console.log(siteConfig);
   return (
     <Layout
       title='Javascript 역사 번역'
