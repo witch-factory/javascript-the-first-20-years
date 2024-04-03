@@ -1,11 +1,9 @@
-import clsx from "clsx";
-import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import Heading from "@theme/Heading";
 
 import styles from "./index.module.css";
-import HomepageFeatures from "../components/HomepageFeatures";
+import { articleList } from "./article";
+import ArticleList from "../components/ArticleList";
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -29,7 +27,28 @@ export default function Home(): JSX.Element {
     >
       <HomepageHeader />
       <main>
-        <HomepageFeatures />
+        <section className={styles.features}>
+          <div className='container'>
+            <div className={styles.column}>
+              <p>
+                이 페이지는 Allen Wirfs-Brock, Brandon Eich가 2020년 쓴{" "}
+                <a href='https://dl.acm.org/doi/pdf/10.1145/3386327'>
+                  "JavaScript: The First 20 Years"
+                </a>
+                의 번역입니다. 원본 저작권은 원 저자에게 있으며 번역 저작권은
+                번역자에게 있습니다.
+              </p>
+              <h2>목차</h2>
+              {articleList.map((part) => (
+                <ArticleList
+                  key={part.title}
+                  title={part.title}
+                  items={part.items}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
     </Layout>
   );
