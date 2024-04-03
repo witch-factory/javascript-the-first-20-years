@@ -41,7 +41,7 @@ export default function Home(): JSX.Element {
               <h2>목차</h2>
               {articleList.map((part) => (
                 <ArticleList
-                  key={part.title}
+                  key={part.title ?? "first-part"}
                   title={part.title}
                   items={part.items}
                 />
