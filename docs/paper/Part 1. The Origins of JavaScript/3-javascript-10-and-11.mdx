@@ -33,6 +33,21 @@ Javascript 1.0 [Netscape 1996d]는 산술 연산, 문자열, 불린값, 일급 �
 
 1996년 초, 이후 1996년 8월 출시되어 넷스케이프 네비게이터 3.0이라 불릴 제품에 대한 작업이 "아틀라스" [Netscape 1996g]라는 코드네임 하에 시작되었다. 브랜든 아이크는 1995년 8월 네비게이터 2.0에서 미완성이거나 누락되었던 기능들에 대한 작업을 다시 시작할 수 있었다. Javascript의 초기 정의와 개발은 네비게이터 3.0에 담긴 Javascript 1.1 [Netscape 1996a,e]이 출시됨으로써 완성되었다. 다음 섹션들은 Javascript 1.0/1.1 언어의 설계에 대한 개요를 제공한다.
 
+|                                                                                            |                                         |
+| ------------------------------------------------------------------------------------------ | --------------------------------------- |
+| `Array` 객체 타입                                                                          | `Array` 리터럴                          |
+| 정규 표현식                                                                                | 객체 리터럴                             |
+| `undefined`의 전역 바인딩                                                                  | `===` 연산자                            |
+| `typeof`, `void`, `delete` 연산자                                                          | `in`, `instanceof` 연산자               |
+| `do-while` 문                                                                              | `switch` 문                             |
+| `try-catch-finally` 문                                                                     | 특정 레이블로 `break/continue`          |
+| 중첩 함수 선언                                                                             | 함수 표현식                             |
+| 함수의 `call`, `apply` 메서드                                                              | 함수의 `prototype` 프로퍼티             |
+| 프로토타입 기반 상속                                                                       | 내장 프로토타입 객체에 대한 접근        |
+| 순환 구조 가비지 컬렉션<sup>[g](/docs/appendix/c-glossary#cyclic-garbage-collection)</sup> | HTML `<script>` 태그의 `src` 어트리뷰트 |
+
+그림 3. 약 2010년에 널리 사용된 Javascript 기능 중 Javascript 1.0에 없었던 것들
+
 ## 3.1 Javascript 문법
 
 JavaScript 1.0의 문법은 C언어의 문장 구문[ANSI X3 1989]과 AWK<sup>g</sup>[Aho 등 1988]에서 영향을 받은 몇 가지 장식을 직접적인 기반으로 모델링되었다. 스크립트는 선언(declaration)과 문장(statement)의 연속이다. C와 달리 Javascript의 문장은 함수 내부에서만 발생해야 한다는 제한이 없다. JavaScript 1.0에서 스크립트의 소스 코드는 HTML 문서 내에 포함된 `<script></script>` 태그로 둘러싸여 있다.
