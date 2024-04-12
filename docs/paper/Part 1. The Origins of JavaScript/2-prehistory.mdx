@@ -15,7 +15,7 @@ Tim Berners-Lee의 웹 기술은 선언적인(_declarative_<sup>g</sup>) HTML �
 
 Brendan Eich[^4]는 1985년 일리노이 어바나-샴페인 대학교에서 석사 학위를 마치고 즉시 Silicon Graphics Inc.(SGI)에서 일을 시작했다. 그는 주로 Unix 커널과 네트워크 계층에 관련된 일을 했다. 1992년에 그는 SGI를 떠나서 많은 투자를 받은 스타트업 MicroUnity에 합류했다. MicroUnity는 비디오 미디어 프로세서를 만드는 회사였다. 두 회사에서 Eich는 커널과 네트워크 프로그래밍 작업을 지원하는 작은 특수목적 언어를 구현했다. MicroUnity에서는 _GCC 컴파일러_<sup>g</sup>에 대한 작업도 조금 했다.
 
-1995년 초 Brandon Eich는 "Netscape에 와서 브라우저에서 돌아가는 Scheme을 구현해라"[^5]라는 말을 미끼로 Netscape에 고용되었다. 그는 1995년 4월 3일에 Netscape에 합류했다. 그러나 그는 Scheme을 구현하게 되는 대신 웹 제품과 프로그래밍 언어 시장의 복잡한 상황을 마주하게 된다. Netscape는 1994년 말, Microsoft의 저가 인수 제안을 거절했다. 그 후 Netscape 경영진은 마이크로소프트의 "Embrace, Extend, Extinguish" 전략[Wikipedia 2019]에 의해 직접적으로 공격받을 것으로 예상했다. 당시 Microsoft는 Bill Gates의 직접적인 경영하에 있었는데, 그들은 웹이 크로스-OS 플랫폼으로 부상할 것을 깨달았다. 또한 그에 따라 Microsoft에서 곧 출시하려고 한 사설 환경의 정보 유틸리티인 프로젝트 블랙버드[Anderson 2007]가 무의미해질 것을 빠르게 깨달았다. Bill Gates의 "Internet Tidal Wave"[Gates 1995] 메모는 Microsoft를 프로젝트 블랙버드에서 _Internet Explorer_<sup>g</sup>와 서버 제품군 쪽으로 완전히 전환시켰다. 그 시점에 Netscape는 해당 시장을 점유하기 위해 서둘렀다.
+1995년 초 Brandon Eich는 "Netscape에 와서 브라우저에서 돌아가는 Scheme을 구현해라"[^5]라는 말을 미끼로 Netscape에 고용되었다. 그는 1995년 4월 3일에 Netscape에 합류했다. 그러나 그는 Scheme을 구현하게 되는 대신 웹 제품과 프로그래밍 언어 시장의 복잡한 상황을 마주하게 된다. Netscape는 1994년 말, Microsoft의 저가 인수 제안을 거절했다. 그 후 Netscape 경영진은 Microsoft의 "Embrace, Extend, Extinguish" 전략[Wikipedia 2019]에 의해 직접적으로 공격받을 것으로 예상했다. 당시 Microsoft는 Bill Gates의 직접적인 경영하에 있었는데, 그들은 웹이 크로스-OS 플랫폼으로 부상할 것을 깨달았다. 또한 그에 따라 Microsoft에서 곧 출시하려고 한 사설 환경의 정보 유틸리티인 프로젝트 블랙버드[Anderson 2007]가 무의미해질 것을 빠르게 깨달았다. Bill Gates의 "Internet Tidal Wave"[Gates 1995] 메모는 Microsoft를 프로젝트 블랙버드에서 _Internet Explorer_<sup>g</sup>와 서버 제품군 쪽으로 완전히 전환시켰다. 그 시점에 Netscape는 해당 시장을 점유하기 위해 서둘렀다.
 
 웹 페이지에 쓰일 스크립트 언어 후보로는 Scheme과 같은 연구용 언어와 Perl, Python, Tcl과 같은 실용적인 Unix 기반 언어, 그리고 Microsoft의 Visual Basic 같이 독점권이 있는 언어들이 있었다. Brendan Eich는 브라우저에 Scheme을 구현할 것으로 예상했다. 하지만 1995년 초 Sun Microsystems는 아직 출시되지 않은[^6] Java 언어에 대한 기습적인 홍보 캠페인[Byous 1998]을 시작했다. Sun과 Netscape는 빠르게 협력하여 Java를 Netscape 2에 통합하는 계약을 체결했다. Eich는 Netscape 회의에서 Marc Andreessen이 "Netscape에 Java가 더해지면 Windows를 죽인다"라는 구호를 외쳤던 걸 회상했다. 1995년 5월 23일 Sun이 Java를 공개한 날, Netscape는 Java의 라이센스를 받아서 브라우저에 사용하려고 한다는 발표를 했다 [Netscape 1995a].
 
@@ -25,7 +25,7 @@ Sun과 Netscape의 주류에 해당하는 사람들은 간단한 스크립트 �
 
 첫 번째 의문은 쉽게 반박되었다. 1995년 봄 당시 Java는 초보자에게 적합한 언어가 아니었다. 메인 프로그램의 코드 본문은 패키지의 _class_<sup>g</sup> 선언 내부의 `main`이라는 정적 _메서드_<sup>g</sup>내에 있어야 했다. 모든 매개변수, 리턴값 그리고 변수에는 정적 _타입_<sup>g</sup>을 선언해 주어야 했다. Visual C++을 보완하는 Visual BASIC, 그리고 네이티브 코드 기반의 컴포넌트를 보완하는 여러 Unix 언어의 경험을 기반으로 고려할 때, 이미 만들어진 컴포넌트들을 조립하는 역할을 할 스크립터들에게 있어 Java는 명백히 복잡했다.
 
-두번째 의문은 마이크로소프트의 제품을 인용하는 것으로 극복할 수 있었다. 마이크로소프트는 전문 Windows 애플리케이션 프로그래머들에게 Visual C++을 판매했다. 그리고 아마추어와 파트타임 프로그래머, 디자이너, 회계사 등에게는 Visual Basic을 판매했다. Visual C++로 만들어진 컴포넌트들을 덜 숙련된 사람들도 조립하고 커스텀할 수 있도록 해주는 스크립트 언어로서였다. "애플리케이션을 위한 Visual Basic"이라고 불린 Visual Basic 버전은 Microsoft Office 제품에 통합되어 오피스 제품들의 사용자 확장과 스크립팅을 지원했다.
+두번째 의문은 Microsoft의 제품을 인용하는 것으로 극복할 수 있었다. Microsoft는 전문 Windows 애플리케이션 프로그래머들에게 Visual C++을 판매했다. 그리고 아마추어와 파트타임 프로그래머, 디자이너, 회계사 등에게는 Visual Basic을 판매했다. Visual C++로 만들어진 컴포넌트들을 덜 숙련된 사람들도 조립하고 커스텀할 수 있도록 해주는 스크립트 언어로서였다. "애플리케이션을 위한 Visual Basic"이라고 불린 Visual Basic 버전은 Microsoft Office 제품에 통합되어 오피스 제품들의 사용자 확장과 스크립팅을 지원했다.
 
 처음의 두 가지 의문을 극복한 후 Marc Andreessen은 브라우저에 들어갈 스크립트 언어의 코드네임으로 "Mocha"를 제안했다. Eich에 의하면 이때 언어의 이름을 적절한 시점에 "Javascript"로 바꾸게 될 거라는 바람이 있었다고 한다. 아무튼 이 Java의 동반자격의 언어는 "Java처럼 보여야" 했고 그럼에도 사용하기 쉬워야 했으며 Java같은 클래스 기반이 아닌 "객체 기반"이어야 했다.
 
