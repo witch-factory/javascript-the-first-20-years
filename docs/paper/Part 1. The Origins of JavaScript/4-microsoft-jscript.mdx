@@ -5,28 +5,28 @@ slug: /part-1/microsoft-jscript
 
 # Microsoft JScript[^22]
 
-넷스케이프와 선이 Javascript를 발표한 주에 마이크로소프는 비주얼 베이직을 "비주얼 베이직 스크립트를 사용해서 월드 와이드 웹 기반 애플리케이션을 만드는 표준"으로 만들겠다고 발표했다[Wingfield 1995]. 마이크로소프트는 1996년 5월 29일 인터넷 익스플로러 3.0 베타 릴리즈에서 Javascript에 대한 지원을 공식적으로 발표했다[Microsoft 1996]. 그 발표 내용은 다음과 같았다.
+Netscape와 Sun이 Javascript를 발표한 주에 Microsoft는 Visual Basic을 "Visual Basic 스크립트를 사용해서 월드 와이드 웹 기반 애플리케이션을 만드는 표준"으로 만들겠다고 발표했다[Wingfield 1995]. Microsoft는 1996년 5월 29일 Internet Explorer 3.0 베타 릴리즈에서 Javascript에 대한 지원을 공식적으로 발표했다[Microsoft 1996]. 그 발표 내용은 다음과 같았다.
 
 ---
 
-**ActiveX Script** 비주얼 베이직 스크립트와 Javascript에 대한 네이티브 지원을 통해 마이크로소프트 인터넷 익스플로러 3.0은 가장 포괄적이고 언어와 독립적인 스크립트 기능을 제공합니다. 마이크로소프트 인터넷 익스플로러는 REXX, CGI, PERL과 같은 추가적인 스크립팅 언어를 지원하도록 확장될 수 있습니다. 웹 페이지 디자이너들은 어떠한 스크립팅 언어도 그들의 HTML 코드에 삽입하여 액티브X 컨트롤, Java Applet, 기타 소프트웨어 구성 요소들을 연결하고 사용자와 상호 작용하는 페이지를 만들 수 있습니다.
+**ActiveX Script** Visual Basic® 스크립트와 Javascript에 대한 네이티브 지원을 통해 Microsoft Internet Explorer 3.0은 가장 포괄적이고 언어와 독립적인 스크립트 기능을 제공합니다. Microsoft Internet Explorer는 REXX, CGI, PERL과 같은 추가적인 스크립팅 언어를 지원하도록 확장될 수 있습니다. 웹 페이지 디자이너들은 어떠한 스크립팅 언어도 그들의 HTML 코드에 삽입하여 ActiveX 컨트롤, Java Applet, 기타 소프트웨어 구성 요소들을 연결하고 사용자와 상호 작용하는 페이지를 만들 수 있습니다.
 
 ---
 
-훗날 JScript라고 불리게 될 작업은 1995년 10월 로버트 웰랜드가 마이크로소프트의 인터넷 익스플로러(IE) 팀에 합류하면서 시작되었다. 웰랜드는 이전에 애플에서 뉴턴 휴대용 컴퓨터와 뉴턴스크립트 언어 [Smith 1995]에 대한 작업을 하였다. 뉴턴스크립트는 Self 언어에 의해 영향을 받은 프로토타입 기반의 객체 지향 언어였다. 웰랜드는 뉴턴스크립트의 주요 설계자인 월터 스미스와 프로젝트에 컨설턴트로 참여했던 데이비드 웅거와 긴밀하게 협업했었다. 그래서 웰랜드는 프로토타입 기반 언어에 대한 웅거의 아이디어와 Self에 매우 익숙했다. 애플을 떠난 후 웰랜드는 어떻게 브라우저에 스크립팅을 추가할지에 대해 고민했다. 이는 그가 인터넷 익스플로러에 스크립팅을 넣는 일을 하게 되는 계기가 되었다.
+훗날 JScript라고 불리게 될 작업은 1995년 10월 Robert Welland가 Microsoft의 Internet Explorer(IE) 팀에 합류하면서 시작되었다. Welland는 이전에 Apple에서 Newton 휴대용 컴퓨터와 NewtonScript 언어 [Smith 1995]에 대한 작업을 하였다. NewtonScript는 Self 언어에 의해 영향을 받은 프로토타입 기반의 객체 지향 언어였다. Welland는 NewtonScript의 주요 설계자인 Walter Smith와 프로젝트에 컨설턴트로 참여했던 David Ungar와 긴밀하게 협업했었다. 그래서 Welland는 프로토타입 기반 언어에 대한 Ungar의 아이디어와 Self에 매우 익숙했다. Apple을 떠난 후 Welland는 어떻게 브라우저에 스크립팅을 추가할지에 대해 고민했다. 이는 그가 Internet Explorer에 스크립팅을 넣는 일을 하게 되는 계기가 되었다.
 
-마이크로소프트에 도착한 웰랜드는 IE에 비주얼 베이직을 넣어야 한다는 지시를 받았다. 하지만 그가 마이크로소프트의 개발자 도구 부서(DevDiv<sup>g</sup>)의 비주얼 베이직 팀에 문의했을 때 그 작업이 2년이 걸릴 것이라는 답변을 받았다. 그와 샘 맥켈비는 IE2에서 애플리케이션을 위한 비주얼 베이직(Visual Basic for Applications)[^23]을 실행시키는 작업을 빠르게 진행했지만, 브라우저 객체 모델과 통합하기는 너무 복잡했다. 웰랜드는 넷스케이프 2 공개 베타에서 LiveScript/Javascript를 관찰하고 Javascript를 위한 간단한 바이트코드 인터프리터를 실험하기 시작했고 맥켈비가 그것을 개선했다. 웰랜드는 DevDiv의 피터 쿠콜이 바이트코드를 생성할 수 있는 Javascript 파서[^24]를 작성한 것을 발견했다. 웰랜드와 맥켈비는 그들의 인터프리터와 쿠콜의 파서, 그리고 패트릭 두수드가 작성한 가비지 컬렉터를 연결하여 JScript의 기초적인 구조를 만들었다.
+Microsoft에 도착한 Welland는 IE에 Visual Basic을 넣어야 한다는 지시를 받았다. 하지만 그가 Microsoft의 개발자 도구 부서(DevDiv<sup>g</sup>)의 Visual Basic 팀에 문의했을 때 그 작업이 2년이 걸릴 것이라는 답변을 받았다. 그와 Sam McKelvie는 IE2에서 Visual Basic for Applications[^23]을 실행시키는 작업을 빠르게 진행했지만, 브라우저 객체 모델과 통합하기는 너무 복잡했다. Welland는 Netscape 2 공개 베타에서 LiveScript/Javascript를 관찰하고 Javascript를 위한 간단한 바이트코드 인터프리터를 실험하기 시작했고 McKelvie가 그것을 개선했다. Welland는 DevDiv의 Peter Kukol이 바이트코드를 생성할 수 있는 Javascript 파서[^24]를 작성한 것을 발견했다. Welland와 McKelvie는 그들의 인터프리터와 Kukol의 파서, 그리고 Patrick Dussud가 작성한 가비지 컬렉터를 연결하여 JScript의 기초적인 구조를 만들었다.
 
-마이크로소프트의 DevDiv는 마이크로소프트의 모든 프로그래밍 언어와 개발자 도구의 개발을 담당하고 있었다. 그래서 윈도우 부서의 IE 팀에서 일하는 로버트 웰랜드와 샘 멕켈비가 새로운 언어 구현의 개발에 관여하는 것은 정치적으로 민감한 문제였다. 또한 IE가 Javascript를 지원해야 하는지에 대한 내부적인 논란도 있었다. DevDiv는 스크립팅을 위한 비주얼 베이직과 애플리케이션을 위한 Java에 집중하고자 했다. 그러나 IE 팀의 목표는 IE3이 넷스케이프 3와 호환되도록 하는 게 목표였다. 이를 위해서는 Javascript 지원이 필요했다. 마이크로소프트는 Javascript를 지원해야 한다는 사실이 만족스럽지 않았지만 이를 무시하기에는 너무 늦었다. IE와 마이크로소프트가 모두 함께 Javascript와 비주얼 베이직 모두를 스크립팅을 위해 지원하고, 스크립팅 언어에 대한 담당은 DevDiv가 맡는 것으로 타협했다. IE/윈도우 팀은 브라우저와 기타 제품에 스크립팅을 통합하는 것을 맡았다.
+Microsoft의 DevDiv는 Microsoft의 모든 프로그래밍 언어와 개발자 도구의 개발을 담당하고 있었다. 그래서 Windows 부서의 IE 팀에서 일하는 Robert Welland와 Sam McKelvie가 새로운 언어 구현의 개발에 관여하는 것은 정치적으로 민감한 문제였다. 또한 IE가 Javascript를 지원해야 하는지에 대한 내부적인 논란도 있었다. DevDiv는 스크립팅을 위한 Visual Basic과 애플리케이션을 위한 Java에 집중하고자 했다. 그러나 IE 팀의 목표는 IE3이 Netscape 3와 호환되도록 하는 게 목표였다. 이를 위해서는 Javascript 지원이 필요했다. Microsoft는 Javascript를 지원해야 한다는 사실이 만족스럽지 않았지만 이를 무시하기에는 너무 늦었다. IE와 Microsoft가 모두 함께 Javascript와 Visual Basic 모두를 스크립팅을 위해 지원하고, 스크립팅 언어에 대한 담당은 DevDiv가 맡는 것으로 타협했다. IE/Windows 팀은 브라우저와 기타 제품에 스크립팅을 통합하는 것을 맡았다.
 
-1996년 1월, 샘 멕켈비는 DevDiv로 팀 이동을 했고 로버트 웰랜드는 IE 팀에 남아 있었다. 또한 1월에는 마이크로소프트 워드 팀에서 DevDiv로 전근한 쇼운 카첸버거가 스크립팅에 관한 작업을 시작하였다. 카첸버거는 인터프리터를 담당하게 되었다. 그리고 비주얼 베이직 팀의 도움을 받아서 같은 인터프리터에서 실행되는 비주얼 베이직의 스크립트 하위 집합을 구성하였다. 이건 비주얼 베이직 스크립트 또는 VBS로 알려지게 되었다.
+1996년 1월, Sam McKelvie는 DevDiv로 팀 이동을 했고 Robert Welland는 IE 팀에 남아 있었다. 또한 1월에는 Microsoft 워드 팀에서 DevDiv로 전근한 Shon Katzenberger가 스크립팅에 관한 작업을 시작하였다. Katzenberger는 인터프리터를 담당하게 되었다. 그리고 Visual Basic 팀의 도움을 받아서 같은 인터프리터에서 실행되는 Visual Basic의 스크립트 하위 집합을 구성하였다. 이건 Visual Basic 스크립트 또는 VBS로 알려지게 되었다.
 
-웰랜드와 멕켈비는 JScript와 VBS 모두를 지원하는 스크립팅 시스템을 임베딩 가능한 컴포넌트로 구성했다. 이는 Active Scripting이라는 이름으로 알려지게 된다. 이 컴포넌트는 1996년 IE3와 마이크로소프트의 웹 서버 제품인 IIS의 일부로 출시되었다. IIS는 Active Server Pages에 서버사이드 스크립팅 기술을 제공했다. Active Scripting은 이후 마이크로소프트 윈도우즈의 표준 구성 요소가 되었고 2019년까지 여전히 레거시 애플리케이션을 지원하기 위해 사용 가능하였다.
+Welland와 McKelvie는 JScript와 VBS 모두를 지원하는 스크립팅 시스템을 임베딩 가능한 컴포넌트로 구성했다. 이는 Active Scripting이라는 이름으로 알려지게 된다. 이 컴포넌트는 1996년 IE3와 Microsoft의 웹 서버 제품인 IIS의 일부로 출시되었다. IIS는 Active Server Pages에 서버사이드 스크립팅 기술을 제공했다. Active Scripting은 이후 Microsoft Windows의 표준 구성 요소가 되었고 2019년까지 여전히 레거시 애플리케이션을 지원하기 위해 사용 가능하였다.
 
-IE 팀은 넷스케이프와의 경쟁에 매우 집중하였다. 그들은 Active Scripting의 기능이었던 스크립트 디버거가 Javascript 웹 개발자들을 끌어들일 것을 기대했다. 넷스케이프에는 Javascript 디버거가 없었기 때문이다. 하지만 그들은 또한 넷스케이프와의 웹사이트 상호 호환성이 IE의 도입에 필수적임을 알고 있었다. 쇼운 카첸버거 등의 사람들은 Javascript를 사용하는 수천 개의 웹사이트에서 IE3의 개발 버전을 실행하고 넷스케이프 2와 넷스케이프 3의 결과와 비교하였다. 차이점을 발견할 때마다 카첸버거는 무엇이 어떻게 다르게 동작하는지를 이해하기 위해 넷스케이프 Javascript 동작을 리버스 엔지니어링했다. 그들은 넷스케이프 Javascript의 몇몇 동작들에 크게 놀랐다. 특히 넷스케이프의 구현에서 HTML 프레임들이 공통 객체 주소 공간을 공유하고 객체들을 자유롭게 교환할 수 있다는 것을 알았을 때 특히 놀랐다. IE는 각각의 프레임을 고립된 환경으로 구현했으며 객체들이 그들 간에 전달될 수 있도록 상당히 많은 재설계가 필요했다.
+IE 팀은 Netscape와의 경쟁에 매우 집중하였다. 그들은 Active Scripting의 기능이었던 스크립트 디버거가 Javascript 웹 개발자들을 끌어들일 것을 기대했다. Netscape에는 Javascript 디버거가 없었기 때문이다. 하지만 그들은 또한 Netscape와의 웹사이트 상호 호환성이 IE의 도입에 필수적임을 알고 있었다. Shon Katzenberger 등의 사람들은 Javascript를 사용하는 수천 개의 웹사이트에서 IE3의 개발 버전을 실행하고 Netscape 2와 Netscape 3의 결과와 비교하였다. 차이점을 발견할 때마다 Katzenberger는 무엇이 어떻게 다르게 동작하는지를 이해하기 위해 Netscape Javascript 동작을 리버스 엔지니어링했다. 그들은 Netscape Javascript의 몇몇 동작들에 크게 놀랐다. 특히 Netscape의 구현에서 HTML 프레임들이 공통 객체 주소 공간을 공유하고 객체들을 자유롭게 교환할 수 있다는 것을 알았을 때 특히 놀랐다. IE는 각각의 프레임을 고립된 환경으로 구현했으며 객체들이 그들 간에 전달될 수 있도록 상당히 많은 재설계가 필요했다.
 
-JScript 개발 과정을 통틀어, 적절한 언어 사양의 부재는 늘 문제였다. 웰랜드가 회상한 바에 따르면, IE3의 개발을 종합적으로 이끌었던 토마스 리어든이 언제나 Javascript 언어 명세가 없는 것을 불평하며 넷스케이프를 비난했다고 한다.
+JScript 개발 과정을 통틀어, 적절한 언어 명세의 부재는 늘 문제였다. Welland가 회상한 바에 따르면, IE3의 개발을 종합적으로 이끌었던 Thomas Reardon이 언제나 Javascript 언어 명세가 없는 것을 불평하며 Netscape를 비난했다고 한다.
 
-[^22]: 이 섹션의 대부분 자료는 2018년 3월 22일에 Allen Wirfs-Brock이 Robert Welland, Shon Katzenberger, Peter Kukol과 진행한 인터뷰 기록을 바탕으로 작성되었다[Welland et al. 2018].
-[^23]: Visual Basic for Applications는 Visual Basic 6의 변종으로 마이크로소프트 오피스 어플리케이션에 포함되었다.
-[^24]: 2018년 인터뷰 당시 쿠콜은 자기가 최근에 마이크로소프트의 Javascript 팀에 방문했는데 그가 작성했던 파서 원본이 확장들과 함께 마이크로소프트의 그 시점 Javascript 구현과 여전히 사용되고 있는 것을 보았다고 이야기했다.
+[^22]: 이 섹션의 대부분 자료는 2018년 3월 22일에 Allen Wirfs-Brock이 Robert Welland, Shon Katzenberger, Peter Kukol과 진행한 인터뷰 기록을 바탕으로 작성되었다 [Welland et al. 2018].
+[^23]: Visual Basic for Applications는 Visual Basic 6의 변종으로 Microsoft 오피스 어플리케이션에 포함되었다.
+[^24]: 2018년 인터뷰 당시 Kukol은 자기가 최근에 Microsoft의 Javascript 팀에 방문했는데 그가 작성했던 파서 원본이 확장들과 함께 Microsoft의 그 시점 Javascript 구현과 여전히 사용되고 있는 것을 보았다고 이야기했다.
