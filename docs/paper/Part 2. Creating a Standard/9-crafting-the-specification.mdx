@@ -15,7 +15,19 @@ Robert Welland는 Redmond로 돌아가서 자신이 만든 JScript 0.1 명세를
 
 당시 초안은 자동 세미콜론 삽입(ASI)의 규칙을 파싱 과정의 에러 수정 과정으로 정확하게 정의하려고 시도한다. 문장 문법은 복합 문장이 아닌 문장에 대해서 문장 종결을 위한 세미콜론을 요구한다. 따라서 자동 세미콜론 삽입이 없으면 세미콜론을 빼먹을 시 구문 오류가 발생한다. ASI 명세는 Javascript 파서가 세미콜론이 있다고 가정하고 파싱을 다시 함으로써 구문 오류를 수정해야 할 때가 언제인지를 정의한다. 첫 번째 초안의 ASI 규칙은 불완전했고 이후의 초안과 ECMAScript 명세 판본에서 다시 정의되었다.
 
-![그림 14](./pictures/figure14.png)
+> **4.7.4 GetValue(V)**
+>
+> 1. 만약 Type(V)가 Reference가 아니면 V를 반환한다.
+>
+> 2. GetBase(V)를 호출한다
+>
+> 3. `2`의 결과가 **null**이면 런타임 에러를 발생시킨다.
+>
+> 4. `2`의 결과의 **[[Get]]** 내부 메서드를 호출한다. GetProperty(V)를 프로퍼티 이름으로, GetAccess(V)를 접근 모드로 전달한다.
+>
+> 5. `4`의 결과를 반환한다.
+>
+> 그림 14. 2007년 1월 10일 ECMAScript 명세 초안의 의사 코드 알고리즘 [TC39 1997c, §4.7.4]이다. 2단계 설명 끝의 마침표는 원본 문서에서 누락되어 있다.
 
 1월 10일의 초안에는 그림 14에서 볼 수 있는 것과 같은 Shon Katzenberger의 의사코드 알고리즘들이 포함되어 있다. 이 알고리즘은 여러 언어 구조의 시맨틱을 정의하기 위해서 사용되었다. 알고리즘들은 순차적으로 번호가 매겨진 단계들과 그 단계들 간에 간단한 조건부 제어 흐름으로 구성되어 있다. 각 단계는 명령적인 산문형 문장으로 구성되어 있다. 각 단계를 서술하는 문장들은 자주 발생하는 동작들에 대해서 명세가 정의한 어휘들을 포함한 영어로 작성되었다. 알고리즘은 이름이 지정될 수 있고 명세의 다른 알고리즘에서 "호출"될 수 있다.
 
@@ -29,7 +41,17 @@ Robert Welland는 Redmond로 돌아가서 자신이 만든 JScript 0.1 명세를
 
 첫 번째 초안의 목차에는 네이티브(내장된) ECMAScript 객체들과 브라우저 및 웹 서버 호스팅 환경에서 제공되는 객체들에 대한 섹션이 포함되어 있었다. 하지만 이 섹션들은 1월 10일 초안에서는 비어 있었다. 초안 내에서 'Issue'라고 명시적으로 태그된 항목이 스무 개 있었다. 이들은 부록에서 설명하는 언어 확장 외에 추가적인 것들이었다.
 
-![그림 15](./pictures/figure15.png)
+|                                                  |           |
+| ------------------------------------------------ | --------- |
+| Scott Wiltamuth (note taker)                     | Microsoft |
+| Brendan Eich                                     | Netscape  |
+| Shon Katzenberger                                | Microsoft |
+| Michael Gardner (1<sup>st</sup> draft co-editor) | Borland   |
+| Randy Solton (1<sup>st</sup> draft co-editor)    | Borland   |
+| Clayton Lewis                                    | Netscape  |
+| Guy Steele (editor)                              | Sun       |
+
+> 그림 15. ES1 명세 작업 그룹의 고정 구성원들
 
 1월 10일 초안은 1997년 1월 15일에 열린 첫 번째 기술 작업 그룹 회의의 논의 기반으로 사용되었다. 여기서는 여러 중요한 결정들이 내려졌는데 [Wiltamuth 1997a] 다음과 같은 내용을 포함한다.
 
@@ -50,7 +72,18 @@ Gardner와 Solton이 작성한 명세 초안에 이어 1997년 2월 27일부터 
 
 그 결정은 몇 년 뒤 널리 사용되는 Javascript 용법을 가능하게 만들었다(역주: `&&`과 `||`이 피연산자의 실제 값을 반환하는 것을 이용해서 `a || b`와 같이 쓰면 `a`가 falsy 값이면 `b`를 사용하는 등의 용법을 말함). null과 undefined는 불린 연산자에 의해 false로 형변환되며 모든 Object 참조는 true로 형변환된다. 이런 문법은 객체 속성과 선택적 함수 매개변수에 대한 기본값을 제공하는 그림 16의 용법을 가능하게 했다.
 
-![그림 16](./pictures/figure16.png)
+```js
+function f( options ) {
+  options = options || getDefaultOptionsObject () ;
+  // if an options object was passed , use it .
+  // otherwise use the default set of options
+  ...
+}
+```
+
+> ES1
+>
+> 그림 16. ECMAScript 1은 함수 매개변수의 기본값을 설정하는 용법을 가능하게 했다.
 
 Brendan Eich는 `==` 연산자가 타입 형변환을 하지 않도록 하는 그의 Javascript 1.2 변경 사항을 포함시키고자 했다고 회상한다. Shon Katzenberger는 그런 변경 사항은 기존의 많은 웹 페이지들을 망가뜨릴 것이므로 너무 늦었다고 성공적으로 반박했다. Eich는 SpiderMonkey의 Javascript 1.3 릴리즈에서 `==` 연산자 동작을 원래대로 되돌렸다.
 
