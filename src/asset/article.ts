@@ -3,10 +3,15 @@ type Item = {
   url: string;
 };
 
-type Part = {
-  title?: string;
-  items: Item[];
-};
+type Part =
+  | {
+      items: Item[];
+    }
+  | {
+      title: string;
+      url: string;
+      items: Item[];
+    };
 
 export const articleList: Part[] = [
   {
@@ -17,7 +22,8 @@ export const articleList: Part[] = [
     ],
   },
   {
-    title: "Part 1: Javascript의 기원",
+    title: "1부: Javascript의 기원",
+    url: "/docs/part-1",
     items: [
       { title: "2. Javascript 이전 시대", url: "/docs/part-1/prehistory" },
       {
@@ -36,7 +42,8 @@ export const articleList: Part[] = [
     ],
   },
   {
-    title: "Part 2: 표준 만들기",
+    title: "2부: 표준 만들기",
+    url: "/docs/part-2",
     items: [
       {
         title: "7. 표준을 어디서 만들 것인가",
@@ -63,7 +70,8 @@ export const articleList: Part[] = [
     ],
   },
   {
-    title: "Part 3: 실패한 개혁, ES4",
+    title: "3부: 실패한 개혁, ES4",
+    url: "/docs/part-3",
     items: [
       {
         title: "14. 불만족스러운 성공",
@@ -83,7 +91,8 @@ export const articleList: Part[] = [
     ],
   },
   {
-    title: "Part 4: Javascript 현대화",
+    title: "4부: Javascript 현대화",
+    url: "/docs/part-4",
     items: [
       {
         title: "20. ES3.1과 ES5의 개발",

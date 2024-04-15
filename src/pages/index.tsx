@@ -39,13 +39,18 @@ export default function Home(): JSX.Element {
                 번역자에게 있습니다.
               </p>
               <h2>목차</h2>
-              {articleList.map((part) => (
-                <ArticleList
-                  key={part.title ?? "first-part"}
-                  title={part.title}
-                  items={part.items}
-                />
-              ))}
+              {articleList.map((part) =>
+                "title" in part ? (
+                  <ArticleList
+                    key={part.title}
+                    title={part.title}
+                    url={part.url}
+                    items={part.items}
+                  />
+                ) : (
+                  <ArticleList key={part.items[0].title} items={part.items} />
+                )
+              )}
               <p>
                 번역하면서 참고한 자료는{" "}
                 <Link to='/reference'>번역에 참고한 문헌들</Link>에서 볼 수
