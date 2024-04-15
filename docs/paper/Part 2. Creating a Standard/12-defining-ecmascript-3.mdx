@@ -13,17 +13,77 @@ TC39의 첫번째 회의에서는 JavaScript 1.0/1.1 언어의 여러 확장이 
 
 이러한 결정들이 내려졌을 때, ISO의 패스트트랙 과정은 아직 시작되지 않았다. 그리고 ISO 패스트트랙 과정에서 나온 변경 사항으로 인해 ECMA-262의 새로운 판을 ISO 판에 맞게 조정하는 작업이 있을 걸로 예상되지는 않았다. 그러나 1998년 초기는 2개의 작업 그룹이 있었는데 각각의 작업 그룹에서 작업하는 회원들은 중복되었지만 둘은 별개의 명세 초안을 작업하고 있었다. “에디션 2”와 “버전 2”가 같은 출판물이 되지 않을 게 분명해졌다. 하지만 TC39 대표들은 작업 중인 명세 초안이 "제 3판"으로 출판될 거라고 알려졌을 때에도 이 기능 작업들을 계속 "버전 2" 또는 "V2"라고 불렀다. TC39의 내부적인 버전 명명이 최종 출판물의 이름과 충돌하는 경우는 이후에도 또 생기게 된다.
 
-![그림 17](./pictures/figure17.png)
+| **기능**                                                                                             | **JavaScript 1.2** | **JScript 3.0** | **ECMA-262 3판** |
+| ---------------------------------------------------------------------------------------------------- | :----------------: | :-------------: | :--------------: |
+| `do` 문                                                                                              |         ✓          |        ✓        |        ✓         |
+| 레이블로 `break`/`continue`                                                                          |         ✓          |        ✓        |        ✓         |
+| `switch` 문                                                                                          |         ✓          |        ✓        |        ✓         |
+| 중첩 함수                                                                                            |         ✓          |        ✓        |        ✓         |
+| 함수 표현식                                                                                          |         ✓          |        ✓        |        ✓         |
+| 객체 리터럴                                                                                          |         ✓          |        ✓        |        ✓         |
+| 배열 리터럴                                                                                          |         ✓          |        ✓        |        ✓         |
+| `===` and `!==`                                                                                      |                    |        ✓        |        ✓         |
+| 정규 표현식 리터럴                                                                                   |         ✓          |        ✓        |        ✓         |
+| `delete` 연산자                                                                                      |         ✓          |        ✓        |        ✓         |
+| 모든 객체에 있는 유사 프로퍼티 `__proto__`                                                           |         ✓          |                 |                  |
+| 배열 메서드 `concat`, `slice`                                                                        |         ✓          |        ✓        |        ✓         |
+| 배열 메서드 `push`, `pop`, `shift`, `splice`, `unshift`                                              |         ✓          |                 |        ✓         |
+| 상속된 원소를 갖는 희소 배열                                                                         |         ✓          |                 |        ✓         |
+| 정규 표현식을 사용하는 문자열 메서드 `fromCharCode`, `match`, `replace`, `search`, `substr`, `split` |         ✓          |        ✓        |        ✓         |
+| 문자열 메서드 `charCodeAt`                                                                           |         ✓          |                 |        ✓         |
+| 정규 표현식 메서드 `compile`, `exec` , `test`                                                        |         ✓          |        ✓        |        ✓         |
+| 정규 표현식의 속성 `$1...$9`, `input`                                                                |         ✓          |        ✓        |                  |
+| 정규 표현식 객체의 전역 속성 `lastMatch`, `lastParen`, `leftContext`, `rightContext`                 |         ✓          |                 |                  |
+| `arguments` 객체의 지역 스코프상의 속성                                                              |         ✓          |        ✓        |                  |
+| `arguments.callee`                                                                                   |         ✓          |                 |        ✓         |
+| `arguments.caller`                                                                                   |         ✓          |        ✓        |                  |
+| `watch`/`unwatch` 함수                                                                               |         ✓          |                 |                  |
+| `import`/`export` 문과 서명된 스크립트                                                               |         ✓          |                 |                  |
+| 조건부 컴파일                                                                                        |                    |        ✓        |                  |
+| `debugger` 키워드                                                                                    |                    |        ✓        |                  |
+
+> 그림 17. 1997년의 주요 웹 브라우저에 포함되어 있었던 *ECMA-262 1판*의 확장들. 이 중 대부분은 *ECMA-262 3판*에 최종적으로 포함되었다.
 
 1997년 말 기술 작업 그룹의 참여자들에 큰 변화가 있었다. 그림 18은 1998년을 통틀어서 적어도 두 번의 작업 그룹 회의록에 등장하는 사람들을 나열하고 있다. 명세의 첫번째 판을 개발한 작업 그룹 중에서 Clayton Lewis만이 계속 활동하고 있었다. Brendan Eich는 1998년 2월에 한 회의에 참석한 후 모질라 프로젝트 [Mozilla Organization 1998]의 공동 창립자가 되었다. 이 모질라 프로젝트는 넷스케이프 브라우저의 코드를 오픈소스로 전환하려는 노력이었다. Waldemar Horwat은 TC39에서 넷스케이프의 언어 디자인 리더 역할을 맡았다. 마찬가지로 마이크로소프트의 Katzenberger는 휴직을 하고 다른 프로젝트로 옮겨갔다. 마이크로소프트에서 Katzenberger가 하던 TC39 관련 업무는 Herman Venter 와 Rok Yu가 맡았다.
 
 1997년 10월, 기술 작업 그룹은 버전 2에 포함할 후보 기능들의 목록(부록 H)을 만들었다. 이렇게 명세에 포함하는 것에 대한 합의가 있었던 기능들은 대체로 넷스케이프의 Javascript 1.2와 마이크로소프트 JScript 3.0의 합집합이었다. 그 합집합에서 배제된 것도 몇 가지 있었지만. 이 후보 기능 목록에는 `toSource`도 있었다. 이는 Brendan Eich가 Javascript 1.3[^37]을 위해 개발한 객체 직렬화/지속 스키마에 해당했다. 명세 포함에 대한 합의가 부족한 다른 기능들은 별도로 나열되었다. 첫번째 판에서 그랬던 것과 같이 작업 그룹은 이미 구현된 기능들을 엄밀하게 명세화하고 구현체들 간의 차이를 해결하는 데에 주로 초점을 맞췄다. 하지만 합의된 기능 목록에는 예외 처리 메커니즘, instanceof 연산자, 그리고 다른 기능들 몇몇이 있었는데 이 기능들은 아직 어떤 구현에도 없었다. 이런 기능들은 아직 구현된 적이 없었다. 따라서 이 기능들은 첫번째 판에는 필요하지 않았던 형태의 설계 작업을 요구했다. 그림 19는 1998년 이전 브라우저에는 없었던 기능들 중 최종적으로 ES3에 포함된 기능들을 나열하고 있다.
+
+|                 |           |               |           |
+| --------------- | --------- | ------------- | --------- |
+| Norris Boyd     | Netscape  | Drew Lytle    | Microsoft |
+| Andrew Clinick  | Microsoft | Karl Matzke   | SunSoft   |
+| Mike Cowlishaw  | IBM       | Mike McCabe   | Netscape  |
+| Jeff Dyer       | Nombas    | Dave Ragget   | HP/W3C    |
+| Bill Gibbons    | Netscape  | Herman Venter | Microsoft |
+| Waldemar Horwat | Netscape  | Rok Yu        | Microsoft |
+| Mike Ksar       | HP        | Chris Weight  | Microsoft |
+| Clayton Lewis   | Netscape  |
+
+> 그림 18. 1998년 TC39 기술 작업 그룹의 정규 구성원
 
 기술 작업 그룹은 매월 대면 회의를 하는 것으로 일정을 잡았다. 프로젝트 편집자였던 Mike Cowlishaw[1999b; Appendix I]는 명세 각 섹션의 현재 상태를 추적하는 문서를 유지했다. 상태를 나타내는 용어로는 "V1 이후 변경되지 않음", "준비되지 않음", "논의 필요", "기능 수용됨", "내용 합의됨"이 있었다. "기능 수용됨" 상태는 위원회가 명세에서 기능이 어떻게 정의될지 합의했다는 것을 의미했다. 그리고 "내용 합의됨" 상태는 실제 명세 텍스트가 검토되고 수용되었음을 의미했다.
 
 Bill Gibbons는 새로운 명세의 작업 초안 편집자였다. 각 회의는 제안들과 해결되지 않은 문제들에 대한 발표와 토론들로 구성된 의제가 있었다. 제안들은 일반적으로 새롭거나 개정된 알고리즘적인 명세 텍스트의 형태로 제시되었다.(역주 : ECMA-262 명세를 보면 각 기능들은 알고리즘적으로 정의되어 있다) 회의에는 참가자들이 마지막 회의 이후 발견한 문제들을 논의하는 일반적인 상태 검토 시간도 있었다. 제안이나 문제 해결에 관한 합의가 이루어지면 Gibbons가 이를 작업 초안에 포함시켰다. V2의 첫번째 완전한 초안 [Cowlishaw et al. 1998]은 1998년 4월에 발표되었으며 ECMA-262 Edition 1을 기반으로 했다. 이는 그때 동시에 개발되고 있던 ECMA-262 Edition 2, ISO 판에서 생긴 변경 사항들을 포함하고 있지 않았다. 작업 초안의 제목 페이지에는 넷스케이프와 마이크로소프트가 제출한 변경 사항 제안들을 포함하고 있다고 명시되어 있었다. 9월에 ISO 판이 완성된 후, Bill Gibbons가 ES2의 변경 사항을 현재 V2 작업 초안에 통합했다.
 
 유니코드는 여전히 새로운 기술이었고 언어 설계자들은 유니코드를 프로그래밍 언어에 통합하는 여러 접근 방식을 찾고 있었다. 특히 중요한 문제는 유니코드의 다양한 정규화 형태를 어떻게 다룰지였다. 이런 다양한 정규화 형태는 동작이 동일한 문자 시퀀스를 다른 방식으로 인코딩할 수 있게 했다. ES1은 유니코드에 대해 매우 제한된 지원을 제공했다. Hewlett-Packard의 Tom McFarland는 1998년 5월의 회의에 참석한 후 국제화<sup>g</sup>(I18N) 그리고 ECMAScript와 유니코드를 더 잘 통합하는 것을 포함한 여러 문제들에 대한 자신의 생각을 기록한 메모[McFarland 1998]를 제출했다. 여러 회의에서 논의된 결과 1998년 11월 TC39는 IBM의 Richard Gillam [1998]이 의장을 맡은 “I18N 작업 그룹”을 설립했다. I18N 그룹은 핵심 언어의 몇 가지 기본적인 I18N 기능에 집중하기로 빠르게 결정했다. 국제화와 지역화의 더 복잡한 측면들은 별도로 정의된 옵셔널 라이브러리에 포함시키기로 하고 당장은 연기하기로 결정했다 [Gillam et al. 1999a,b]. 그러나 이런 국제화와 지역화 관련 라이브라러의 명세[Lindenberg 2012]가 완성된 것은 2012년이 되어서였다. I18N 그룹은 언어에 몇 개의 지역-특화(locale-specific)함수를 추가하고 non-Latin 문자를 어떻게 식별자로 포함시킬지에 대한 것도 해결했다. I18N 그룹은 구현에 제시된 소스코드가 유니코드 C 정규화 형식(Unicode Normal Form C)으로 되어 있다고 간주하고 ECMAScript 언어 명세를 작성하도록 권고함으로써 정규화 문제를 대부분 회피했다. 또한 언어 코어에는 유니코드 정규화에 대한 지원을 포함시키지 않고, 정규화에 대한 프로그램적 지원은 옵셔널 라이브러리에 포함시키기로 하고 연기했다.
+
+> - `try-catch-finally` 및 예외 객체
+>
+> - `instanceof`와 `in` 연산자
+>
+> - Object 프로토타입 메소드: `hasInstance`, `hasOwnProperty`, `isPrototypeOf`, `propertyIsEnumerable`
+>
+> - `undefined`의 전역 바인딩
+>
+> - `toFixed`, `toExponential`, `toPrecision`
+>
+> - URI 핸들링 함수
+>
+> - 식별자 내의 유니코드 문자
+>
+> - 기본적인 I18N 메소드: 객체 `toLocaleString`, 배열 `toLocaleString`, 숫자 `toLocaleString`, 문자열 `localeCompare`, `toLocaleLowerCase`, `toLocaleUpperCase`, Date `toLocaleDateString`, `toLocaleTimeString`
+>
+> 그림 19. 1998년 이전 브라우저에는 없었던 ES3의 새로운 기능들. 이 기능들 중 몇몇은 TC39에서 ES3을 개발하고 있는 동안 브라우저에 포함되었다.
 
 V2의 주요 과제 중 하나는 언어의 에러 핸들링 메커니즘을 설계하는 것이었다. 1998년 2월 [TC39 1998c], 마이크로소프트의 Herman Venter와 넷스케이프의 Waldemar Horwat는 각자의 설계 스케치를 발표했다. 두 설계 모두 Java의 try-catch-finally 문법을 대략적으로 기반삼아 만들어졌지만 Java와의 사이에 그리고 서로간에도 상당한 문법적 차이와 의미적 차이가 있었다.
 
@@ -33,7 +93,66 @@ V2의 주요 과제 중 하나는 언어의 에러 핸들링 메커니즘을 설
 
 1998년 2월 회의에서, 위원회는 `try`와 `catch` 키워드를 사용하기로 합의했다. 그리고 `throw`문은 특정 내장 예외 클래스의 인스턴스뿐만 아니라 어떤 값이든 에러로 쓰여서 전파될 수 있도록 했다. 1998년 3월 작업 그룹 회의에서 Waldemar Horwat는 `finally` 절이 포함되어야 한다고 주장하고 그것이 어떻게 구현될 수 있을지에 대한 세부 사항을 더 조사해 오기로 했다. 4월 작업 초안[Cowlishaw et al. 1998]은 Netscape의 설계를 통합했다. 하지만 `finally`의 지원, `catch`변수 바인딩의 범위, `catch` 절 여러 개를 허용할지의 여부, `instanceof`가 `catch`절을 선택하는 데에 쓰일 수 있을지, 선택되지 않은 예외를 자동으로 다시 throw할지 등의 문제들은 아직 해결되지 않은 상태로 남아 있었다. 그림 20은 마이크로소프트의 제안, 넷스케이프의 수정된 제안, 그리고 최종적으로 ES3에서 명세된 문법의 예시를 보여준다. 넷스케이프의 설계에서는 catch 절을 선택하기 위한 별도의 선택을 위한 표현식이 사용되는 반면 마이크로소프트의 설계와 최종 ES3 설계에서는 단일 catch 블록에서 다양한 예외를 구분하기 위한 사용자 로직이 필요하다.
 
-![그림 20](./pictures/figure20.png)
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs>
+  <TabItem value='microsoft' label='Microsoft의 설계' default>
+    ```javascript
+    try {
+      doSomething();
+    } catch (var e) {
+      if (e == "thing")
+        console.log("a thing")
+      else if (e == 42)
+        console.log("42")
+      else {
+        console.log(e);
+        cleanup();
+        throw e; // rethrow
+      }
+      // no syntactic finally
+    }
+    cleanup();
+    ```
+  </TabItem>
+  <TabItem value='netscape' label='Netscape의 설계'>
+    ```js
+    try {
+      doSomething();
+    } catch (e if e == "thing") {
+      console.log("thing")
+    } catch (e2 if e2 == 42) {
+      console.log("42")
+    } catch (e3) {
+      console.log(e3);
+      throw e3; // rethrow
+    } finally {
+      cleanup();
+    }
+    ```
+  </TabItem>
+  <TabItem value='es3' label='3판의 최종 설계'>
+    ```js
+    try {
+      doSomething();
+    } catch (e) {
+      if (e == "thing")
+        console.log("a thing")
+      else if (e == 42)
+        console.log("42")
+      else {
+        console.log(e);
+        throw e; // rethrow
+      }
+    } finally {
+      cleanup();
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+> 그림 20. 예외 처리의 다양한 설계들. 이 예시에서 `doSomething` 함수는 현재 함수를 계속 실행하기 전에 별도로 처리해야 하는 2가지 종류의 예외를 발생시킬 수 있다. 다른 모든 예외들은 현재 함수를 호출한 위치로 전파하기 위해 "재발생"된다. 현재 함수는 `doSomething`이 예외를 발생시키는지 여부에 관계없이 수행해야 하는 `cleanup` 과정이 있다.
 
 언어가 여러 개의 `catch`절을 지원해야 하는지에 대한 문제는 1999년 9월 초안 표준의 최종 기술 검토 [TC39 1999b]에서도 해결되지 않은 채로 남아 있었다. 그리고 해당 리뷰에서 그 기능은 최종적으로 추후 고려 사항으로 연기되었다. 또한 내장 예외 클래스가 표준에 정의되는 데에 대한 합의도 이 최종 검토에서 이루어졌다.
 
@@ -45,9 +164,9 @@ Java 경험을 가진 신입 Javascript 프로그래머들은 `instanceof`가 �
 
 ES3은 원래 Javascript 1.2에 도입되었던 것과 비슷한 내부 함수 선언과 함수 표현식을 포함한다. 함수 선언문은 `{}`블록 내부나 서브 문장으로 중첩되지 못하도록 명시적으로 제외되었다. 이후 Waldemar Horwat [2008b]는 그 이유를 다음과 같이 설명했다.
 
-1. `var`에 그랬던 것과 같이 이런 함수 선언문을 스코프 최상위로 끌어올리는 것은 제대로 작동하지 않는다. 왜냐 하면 이런 함수들은 아직 존재하지 않는 변수들을 포함하는 스코프를 캡처할 수 있기 때문이다. ES3에는 지역 스코프가 없었지만 같은 문제를 일으킬 수 있는 예외 스코프가 있었다. 언어에 상수와 동적(런타임) 타입 어노테이션을 추가했을 때 어떻게 될지를 고려하면 이 문제는 더욱 악화된다. 이런 함수들은 아직 생성되지 않은 상수들을 캡처할 수 있었고 심지어는 아직 타입이 계산되지 않은 변수들을 캡처할 수도 있었다!
-2. 함수 선언문을 만난 시점에 함수와 다른 선언들을 바인딩하도록 하면 잘 작동했을 것이다. 하지만 함수의 지원을 위해서만 ES3에 이런 로컬 바인딩을 구현하고 싶지는 않았다.
-3. 함수 선언문이 `if`문의 서브문장(\*if문 조건이 참일 때 실행되는 블록) 위치에 있다고 하자. 그러면 의도는 `if` 표현식이 참일 때(`else`절의 경우 거짓일 때)만 함수를 생성하고 함수를 가장 가까운 블록 스코프에 넣는 것이었다. 이는 일종의 조건부 컴파일 형태를 구성할 것이다. 속성을 가진 블록이 함수 선언문 이전에 나올 경우 이 블록은 블록에 포함된 정의들에서 속성에 접근할 수 있도록 해주는 비-스코핑 블록이 될 것이다. 따라서 하나의 `if`문에 여러 정의를 첨부할 수 있게 된다.
+> 1. `var`에 그랬던 것과 같이 이런 함수 선언문을 스코프 최상위로 끌어올리는 것은 제대로 작동하지 않는다. 왜냐 하면 이런 함수들은 아직 존재하지 않는 변수들을 포함하는 스코프를 캡처할 수 있기 때문이다. ES3에는 지역 스코프가 없었지만 같은 문제를 일으킬 수 있는 예외 스코프가 있었다. 언어에 상수와 동적(런타임) 타입 어노테이션을 추가했을 때 어떻게 될지를 고려하면 이 문제는 더욱 악화된다. 이런 함수들은 아직 생성되지 않은 상수들을 캡처할 수 있었고 심지어는 아직 타입이 계산되지 않은 변수들을 캡처할 수도 있었다!
+> 2. 함수 선언문을 만난 시점에 함수와 다른 선언들을 바인딩하도록 하면 잘 작동했을 것이다. 하지만 함수의 지원을 위해서만 ES3에 이런 로컬 바인딩을 구현하고 싶지는 않았다.
+> 3. 함수 선언문이 `if`문의 서브문장(\*if문 조건이 참일 때 실행되는 블록) 위치에 있다고 하자. 그러면 의도는 `if` 표현식이 참일 때(`else`절의 경우 거짓일 때)만 함수를 생성하고 함수를 가장 가까운 블록 스코프에 넣는 것이었다. 이는 일종의 조건부 컴파일 형태를 구성할 것이다. 속성을 가진 블록이 함수 선언문 이전에 나올 경우 이 블록은 블록에 포함된 정의들에서 속성에 접근할 수 있도록 해주는 비-스코핑 블록이 될 것이다. 따라서 하나의 `if`문에 여러 정의를 첨부할 수 있게 된다.
 
 주요 브라우저들은 이러한 우려를 무시하고 블록 내에서의 함수 선언을 구현했다. 하지만 각 구현은 블록 내에서의 함수 선언문의 구현을 위해 자체적인 고유한 시맨틱을 만들어냈다. 이것은 15년 후 ES6의 설계자들에게 상당한 문제를 야기했다 [TC39 2013b, Function In Block Options; §21.3.2].
 
@@ -86,6 +205,8 @@ var lambdaFact = function fact(n) {
 lambdaFact(5); // 이는 재귀적으로 작동해야 하는가 아니면 throw를 해야 하는가?
 ```
 
+> ES3 초안에서
+
 해당 초안에서 `lambdaFact`를 호출하면 throw가 동작했을 것이다. 왜냐 하면 함수 표현식에 명시된 이름 `fact`는 `fact`에 대한 어휘적 바인딩을 생성하지 않았기 때문에다. 9월 회의에서는 이렇게 함수 표현식에 명시된 이름은 해당 함수 표현식의 본문 내에서만 보이는 지역적인 함수명 바인딩을 만들도록 명세를 수정하는 것에 대한 합의가 있었다.
 
 가장 놀라운 마지막 추가 사항은 "joined functions"라는 기능이었다. 이는 Waldemar Horwat가 회의에서 제안한 것이었다. 이 기능은 다음과 같은 상황에서 함수가 동일한 함수 클로저 객체를 반복적으로 반환할 수 있도록 허용했다.
@@ -104,9 +225,37 @@ var secondTime = getClosure();
 console.log(firstTime === secondTime); // 둘이 같은 객체인가?
 ```
 
+> ES3에서만 가능
+
 Waldemar Horwat는 클로저 생성의 오버헤드에 대한 우려를 가지고 있었다. 따라서 이런 joined function 기능을 통해 일부 일반적인 상황에서는 구현체가 클로저를 재사용할 수 있도록 재량권을 부여할 수 있을 거라고 주장했다. Herman Venter는 몇 가지 우려를 표했지만, 회의가 끝날 때는 이 변경을 허용하기로 동의했다. 이는 중대한 설계 실수가 될 수 있었다. joined function 기능에 의해 가능해질 구현의 다양성들은 웹사이트들이 모든 브라우저에서 성공적으로 작동하는 것을 방해할 수 있었기 때문이다. 이는 웹 브라우저의 후속 경험들이 이후 보여주었다. 다행히 어떤 브라우저도 이 joined function 기능을 구현하지 않았다. 그리고 2009년 이 기능은 ES5 명세에서 제거되었다.
 
-![그림 21](./pictures/figure21.png)
+Mike Ang Gary Fisher Clayton Lewis Sam Ruby
+Christine Begle Richard Gabriel Drew Lytle Dario Russi
+Norris Boyd Michael Gardner Bob Mathis David Singer
+Carl Cargill Bill Gibbons Karl Matzke Randy Solton
+Andrew Clinick Richard Gillam Mike McCabe Guy Steele
+Donna Converse Waldemar Horwat Tom McFarland Michael Turyn
+Mike Cowlishaw Shon Katzenberg Anh Nguyen Herman Venter
+Chris Dollin Cedric Krumbein Brent Noorda George Wilingmyre
+Jeff Dyer Mike Ksar Andy Palay Scott Wiltamuth
+Brendan Eich Roger Lawrence Dave Raggett Rok Yu
+Chris Espinosa Steve Leach Gary Robinson
+
+|                 |                 |               |                   |
+| --------------- | --------------- | ------------- | ----------------- |
+| Mike Ang        | Gary Fisher     | Clayton Lewis | Sam Ruby          |
+| Christine Begle | Richard Gabriel | Drew Lytle    | Dario Russi       |
+| Norris Boyd     | Michael Gardner | Bob Mathis    | David Singer      |
+| Carl Cargill    | Bill Gibbons    | Karl Matzke   | Randy Solton      |
+| Andrew Clinick  | Richard Gillam  | Mike McCabe   | Guy Steele        |
+| Donna Converse  | Waldemar Horwat | Tom McFarland | Michael Turyn     |
+| Mike Cowlishaw  | Shon Katzenberg | Anh Nguyen    | Herman Venter     |
+| Chris Dollin    | Cedric Krumbein | Brent Noorda  | George Wilingmyre |
+| Jeff Dyer       | Mike Ksar       | Andy Palay    | Scott Wiltamuth   |
+| Brendan Eich    | Roger Lawrence  | Dave Raggett  | Rok Yu            |
+| Chris Espinosa  | Steve Leach     | Gary Robinson |                   |
+
+> 그림 21. ECMA-262의 1,2,3판의 기술 기여자들
 
 앞에 `0`이 붙은 형태로 작성되는 8진수 상수와 문자열 리터럴의 8진수 이스케이프 시퀀스는 권장되지 않았다. 이것들이 표준의 규범적인(normative<sup>g</sup>) 명세에서 비규범적인 부속 문서 B[^41]로 옮겨졌기 때문이다. 같이 부속 문서 B로 옮겨진 개념들은 Y2K를 준수하지 않는 Date 메소드, `escape` 및 `unescape` 문자열 함수, 문자열 메소드 `substr`이 있었다. 이들은 모두 구식이지만 여전히 웹사이트에서 사용되는 기능들이었다. TC39에서는 이렇게 표준의 비규범적 부속 문서 B에 기능들을 옮겨서 나열함으로써 이 기능들이 더 이상 사용되어서는 안 되는 기능이며 구현체가 결국 이를 제거할 수 있는 권한을 갖게 될 것임을 사람들에게 시사하고자 했다. 하지만 이는 순진한 기대였다. TC39 회원들은 브라우저 구현자들이 웹 페이지에서 실제로 사용되고 있을 수 있는 어떤 기능을(그 기능이 표준화되었건 그렇지 않건 간에) 제거하는 것을 굉장히 꺼릴 거라는 걸 아직 깨닫지 못했다. 일부 웹 페이지들은 절대로 사라지지 않는다.
 
