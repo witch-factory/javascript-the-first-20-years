@@ -7,13 +7,43 @@ slug: /part-4/developing-es31-es5
 
 2007년 대부분의 기간 동안, ES4_2 작업 그룹은 ES3.1 활동이 단순히 ES4_2를 방해하기 위한 경쟁적인 시도이며 기술적 실체가 결여되어 있다고 믿었다. 그러나 Douglas Crockford, Pratap Lakshman, Allen Wirfs-Brock은 ES3 명세를 최신화하고 상호 호환성 문제의 원인들을 수정하는 점진적인 개선을 하는 데에 전념했다. ES3.1의 초기 목표, 설계 원칙, 제안된 기능 변경사항 [Lakshman et al. 2007]을 게시한 후 이루어진 첫 활동은 당시 웹 브라우저에서의 JavaScript의 상태와 웹의 당시 현실이 ES3 명세와 어떻게 다른지에 대한 보다 충분한 이해를 만드는 것이었다.
 
-![그림 29](./pictures/figure29.png)
+> **2.15 String.prototype.split: §15.4.4.14**<br/>
+> ES3 states that "If separator is a regular expression that contains capturing parentheses, then each time separator is matched the results (including any undefined results) of the capturing parentheses are spliced into the output array."
+>
+> JScript ignores the capturing parentheses. FF outputs empty strings instead of undefined.<br/>
+> Example:<br/> `<script>`<br/>`alert("A<B>bold</B>and<CODE>coded</CODE>".split(/<(\/)?([^<>]+)>/));`<br/>`</script>`
+>
+> Output:<br/>
+> IE: `A`,`bold`,`and`,`coded`<br/>
+> FF: `A`,,`B`,`bold`,`/`,`B`,`and`,,`CODE`,`coded`,`/`,`CODE`,<br/>
+> Opera: same as FF<br/>
+> Safari: same as IE
+>
+> 그림 29. JScript Deviations 보고서에 문서화된 ES3 명세와 JScript의 차이점
 
 ES3.1 작업 그룹이 당면한 우려는 Microsoft Internet Explorer의 JScript 구현이 웹 표준을 준수하지 않는 것으로 정평이 나 있었다는 것이었다. ECMAScript에 대한 그런 우려의 타당성과 범위를 이해하기 위해, Allen Wirfs-Brock은 Pratap Lakshman에게 IE JScript가 어떤 부분에서 ES3과 다른지 알아내기 위한 분석을 수행하기를 요청했다. 이로 인해 "JScript가 ES3에서 벗어나는 점들"이라는 87페이지 분량의 보고서 [Lakshman 2007c]가 작성되었으며 이 보고서는 2007년 9월에 완성되었다. 보고서에는 세 가지 주요 섹션이 있었다. 첫 번째 주요 섹션은 당시의 JScript 구현이 ES3 명세의 명확한 요구사항에서 벗어난 지점들을 식별했다. ES3를 벗어난 각 부분에 대해 보고서는 ES3 명세 언어에서 위반된 부분, 그 부분을 관찰할 수 있는 테스트 케이스, 그리고 Internet Explorer, Mozilla Firefox, Opera, Apple Safari의 당시 최신 릴리즈에서 해당 테스트를 실행한 결과를 제공했다. 이 브라우저들은 당시 "상위 네 개" 브라우저로 간주되었다. 그림 29는 ES3 명세와의 식별된 차이를 보여주는 예시이다. 일부 차이는 Internet Explorer에만 있었고, 일부는 모든 테스트된 브라우저에서 동일하게 발생했으며, 일부는 Internet Explorer와 다른 하나 또는 두 개의 브라우저에서 발생했다.
 
 보고서의 두 번째 주요 섹션은 ES3 명세에서 동작이 구현에 따라 달라진다고(implementation dependent) 명시적으로 정의되어 있거나 동작이 충분하게 정의되지 않은 모든 부분을 식별했다. 편차 보고서의 두 번째 주요 섹션은 ES3 사양에서 행동이 명시적으로 구현에 따라 달라지거나 충분히 정의되지 않은 모든 장소를 식별했다. 이 섹션 역시 테스트 케이스와 4개의 주요 브라우저에서 테스트를 실행한 결과를 제공했다. 마지막 주요 섹션은 Internet Explorer가 ES3 명세의 확장으로 구현한 기능들을 설명했다. Wirfs-Brock [2007b]은 또한 Firefox의 ES3 확장 목록을 문서화하여 준비했다. Douglas Crockford와 Allen Wirfs-Brock은 2007년 8월 16일에 이러한 문서들의 초안을 검토하기 위해 만났다. 회의 결과는 ES3.1 명세에 대한 잠정적인 변경 사항 집합 [Wirfs-Brock and Crockford 2007]이었다.
 
-![그림 30](./pictures/figure30.png)
+Douglas Crockford Yahoo!
+Pratap Lakshman Microsoft
+Mark S. Miller Google
+Adam Peller IBM
+Sam Ruby IBM
+Allen Wirfs-Brock Microsoft
+Kris Zyp The Dojo Foundation
+
+|                   |                     |
+| ----------------- | ------------------- |
+| Douglas Crockford | Yahoo!              |
+| Pratap Lakshman   | Microsoft           |
+| Mark S. Miller    | Google              |
+| Adam Peller       | IBM                 |
+| Sam Ruby          | IBM                 |
+| Allen Wirfs-Brock | Microsoft           |
+| Kris Zyp          | The Dojo Foundation |
+
+> 그림 30. ES3.1 총회의의 정규 참석자들
 
 ES3.1의 개발은 2008년 1월 TC39 회의에서 본격적으로 시작되었다. 그 회의에서는 ES3.1의 목표가 검토되었고 여러 추가적인 TC39 참여자들이 이 작업에 관심을 표현했다. 2월 11일, Lakshman은 TC39 사설 이메일 리스트에 ES3.1에 대한 활동을 촉구하는 메시지를 보냈다. 이 이메일은 지난 여름에 준비된 ES3과의 차이와 상호 호환성을 다룬 문서에 대한 주의를 불러일으키고 문서에 대한 피드백을 요청했다. 2월 21일의 전화 회의에서 매주 2번씩의 전화 회의 일정이 수립되었다. 이 전화 회의에 참여한 사람들은 이전의 ES3.1 논의에 참여한 사람보다 훨씬 많았다. 그림 30은 정기적으로 참석한 사람들을 나열한다. 처음에는 제안을 주고받고 논의하기 위해 직통 이메일이 사용되었다. 일부 추가적인 ES3.1 관련 논의는 `es4-discuss` 이메일 포럼에서 일어났다. 그러나 ES4_2와 관련된 주제의 이야기들이 ES3.1에 특정된 주제들을 찾기 어렵게 만들었다. 그래서 4월에는 별도의 `es3.1-discuss`[^80] 이메일 포럼 [TC39 et al. 2008]이 생성되었고 각 회의 사이에 이루어지던 ES3.1 설계 논의의 대부분이 그곳으로 이동했다.
 

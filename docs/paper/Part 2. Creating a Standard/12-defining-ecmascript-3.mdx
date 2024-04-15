@@ -68,19 +68,12 @@ Bill Gibbons는 새로운 명세의 작업 초안 편집자였다. 각 회의는
 유니코드는 여전히 새로운 기술이었고 언어 설계자들은 유니코드를 프로그래밍 언어에 통합하는 여러 접근 방식을 찾고 있었다. 특히 중요한 문제는 유니코드의 다양한 정규화 형태를 어떻게 다룰지였다. 이런 다양한 정규화 형태는 동작이 동일한 문자 시퀀스를 다른 방식으로 인코딩할 수 있게 했다. ES1은 유니코드에 대해 매우 제한된 지원을 제공했다. Hewlett-Packard의 Tom McFarland는 1998년 5월의 회의에 참석한 후 국제화<sup>g</sup>(I18N) 그리고 ECMAScript와 유니코드를 더 잘 통합하는 것을 포함한 여러 문제들에 대한 자신의 생각을 기록한 메모[McFarland 1998]를 제출했다. 여러 회의에서 논의된 결과 1998년 11월 TC39는 IBM의 Richard Gillam [1998]이 의장을 맡은 “I18N 작업 그룹”을 설립했다. I18N 그룹은 핵심 언어의 몇 가지 기본적인 I18N 기능에 집중하기로 빠르게 결정했다. 국제화와 지역화의 더 복잡한 측면들은 별도로 정의된 옵셔널 라이브러리에 포함시키기로 하고 당장은 연기하기로 결정했다 [Gillam et al. 1999a,b]. 그러나 이런 국제화와 지역화 관련 라이브라러의 명세[Lindenberg 2012]가 완성된 것은 2012년이 되어서였다. I18N 그룹은 언어에 몇 개의 지역-특화(locale-specific)함수를 추가하고 non-Latin 문자를 어떻게 식별자로 포함시킬지에 대한 것도 해결했다. I18N 그룹은 구현에 제시된 소스코드가 유니코드 C 정규화 형식(Unicode Normal Form C)으로 되어 있다고 간주하고 ECMAScript 언어 명세를 작성하도록 권고함으로써 정규화 문제를 대부분 회피했다. 또한 언어 코어에는 유니코드 정규화에 대한 지원을 포함시키지 않고, 정규화에 대한 프로그램적 지원은 옵셔널 라이브러리에 포함시키기로 하고 연기했다.
 
 > - `try-catch-finally` 및 예외 객체
->
 > - `instanceof`와 `in` 연산자
->
 > - Object 프로토타입 메소드: `hasInstance`, `hasOwnProperty`, `isPrototypeOf`, `propertyIsEnumerable`
->
 > - `undefined`의 전역 바인딩
->
 > - `toFixed`, `toExponential`, `toPrecision`
->
 > - URI 핸들링 함수
->
 > - 식별자 내의 유니코드 문자
->
 > - 기본적인 I18N 메소드: 객체 `toLocaleString`, 배열 `toLocaleString`, 숫자 `toLocaleString`, 문자열 `localeCompare`, `toLocaleLowerCase`, `toLocaleUpperCase`, Date `toLocaleDateString`, `toLocaleTimeString`
 >
 > 그림 19. 1998년 이전 브라우저에는 없었던 ES3의 새로운 기능들. 이 기능들 중 몇몇은 TC39에서 ES3을 개발하고 있는 동안 브라우저에 포함되었다.
