@@ -23,7 +23,45 @@ TraceMonkey [Gal et al. 2009]는 모질라의 초기 접근이었는데 캘리�
 
 ## 19.2 CommonJS와 Node.js(CommonJS and Node.js)
 
-![그림 28](./pictures/figure28.png)
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs>
+  <TabItem value='commonjs' label='CommonJS 모듈' default>
+    ```javascript
+    // moda.js - source
+    var modp = require("modp");
+    exports.n = modp.p++;
+    exports.modName = "prefix" + exports.n;
+
+    // modb.js - source
+    var modx = require(require("moda").modName);
+    var propName = Object.keys(modx)[0];
+    exports[propName] = modx[propName];
+    ```
+
+  </TabItem>
+    <TabItem value='translate' label='변환 결과'>
+    ```javascript
+    // moda.js - CJS 확장
+    (function(exports, require, module) {
+      var modp = require("modp");
+      exports.n = modp.p++;
+      exports.modName = "prefix" + exports.n;
+    });
+
+    // modb.js - CJS 확장
+    (function(exports, require, module) {
+      var modx = require(require("moda").modName);
+      var propName = Object.keys(modx)[0];
+      exports[propName] = modx[propName];
+    });
+    ```
+
+  </TabItem>
+  </Tabs>
+
+> 그림 28. CommonJS 모듈은 모듈 로더에 의해 모듈 패턴을 구현한 함수로 변환된다. 모듈 간의 공유는 동적으로 구성된 `exports` 객체의 속성을 통해 이루어진다.
 
 JavaScript는 처음 생겼을 때부터, 기본적인 스크립팅 기능을 제공하기 위해 서버 플랫폼에서도 호스팅되었다. 하지만 각 플랫폼은 자체적인 Javascript API를 제공했고 각각이 고유했다. Javascript가 나오고 15년 동안 브라우저 외의 환경에서의 Javascript 애플리케이션을 위한 도메인 독립적이고 상호 호환 가능한 공통의 환경은 없었다. 2009년 1월 Adobe와 Mozilla에서 일했으며 Khan Academy의 개발자였던 Kevin Dangoor는 그런 상황을 바꾸기로 했다. 그는 문제를 설명하는 블로그 포스트 [Dangoor 2009]를 작성했다. 그리고 온라인 토론 그룹과 위키를 통해서 이런 문제를 해결하는 데에 참여하도록 서버사이드 Javascript 커뮤니티에 권유했다. 1년 후 후속 블로그 포스트[Dangoor 2010]에서 그는 원래 만들고자 했던 것을 다음과 같이 요약했다.
 
