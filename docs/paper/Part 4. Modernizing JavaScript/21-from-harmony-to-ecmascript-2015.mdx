@@ -27,7 +27,35 @@ TC39의 Harmony 프로젝트는 ES4 작업 중에 이루어진 이전의 결정�
 
 가능한 Harmony 기능에 대한 논의는 광범위했고 2009년 여름까지 위원회는 활동에 더 많은 구조를 도입하기로 결정했다. 2009년 7월 회의 [TC39 2009a]에서 TC39 멤버들은 Harmony의 목표를 정의할 때라고 결정했다. 그들은 ES3.1의 목표 [Crockford 2008a]가 몇 가지 추가 사항과 개선이 있다면 여전히 적용 가능하다고 결론지었다. Brendan Eich [2009a]는 그 목표의 업데이트된 버전을 게시했다. 그 결과인 Harmony의 목표 선언문이 그림 38에 나타나 있다.
 
-![그림 38](./pictures/figure38.png)
+> ### 요구 사항
+>
+> 1. 새로운 기능은 구체적인 시연을 해야 한다.
+> 2. 언어를 일반적인 개발자들이 사용하기 쾌적하도록 유지한다.
+> 3. 언어의 "작게 시작하고 반복적으로 프로토타입을 만드는" 특성을 보존한다.
+>
+> ### 목표
+>
+> 1. 다음과 같은 것들을 작성하는 데에 더 나은 언어가 된다:
+>    - 복잡한 애플리케이션
+>    - 해당 애플리케이션들에 의해 공유되는 라이브러리(DOM을 포함할 수 있음)
+>    - 새 버전을 대상으로 하는 코드 생성기
+> 2. 테스트 가능한 명세로 전환한다. 이상적으로는 주로 ES5로 호스팅되는 정의적 인터프리터가 된다.
+> 3. 가능한 경우 사실상의 표준을 도입하며 구현체 간 호환성을 향상시킨다.
+> 4. 버전 관리를 가능한 한 단순하고 선형적으로 유지한다.
+> 5. 정적으로 검증 가능한, 객체-능력 보안 부분 집합을 지원한다.
+>
+> ### 방법
+>
+> 1. ES5 이외에 필요한 추가적인 의미 상태를 최소화한다.
+> 2. 다음을 위한 구문적 편의성을 제공한다:
+>    - 좋은 추상화 패턴
+>    - 응집도 높은 패턴
+>    - 커널 시맨틱으로의 디슈거링으로 정의됨
+> 3. 혼란스럽거나 문제가 되는 구조를 버저닝이나 컴파일러 지시문을 통해 제거한다.
+>    - Harmony가 ES5 엄격 모드를 기반으로 만들어지도록 고려한다.
+> 4. 호스트 객체 에뮬레이션을 허용하는 가상화 지원을 제공한다.
+>
+> 그림 38. Harmony의 목표 선언문, 2009년 7월 [Eich 2009a]
 
 ### 21.1.2 챔피언스 모델(The Champions Model)
 
@@ -37,17 +65,66 @@ Dave Herman은 "챔피언 모델" 개발 방식을 도입할 것을 위원회에
 
 ### 21.1.3 기능 집합 정하기(Choosing a Feature Set)
 
-![그림 39](./pictures/figure39.png)
+> ### 테마들
+>
+> 1. 모듈 기능 혹은 외부 사용자로부터 내부를 숨기기 위해 소스 코드 단위를 구분하는 방법
+> 2. 사이드 이펙트의 전파를 방지하거나 특정 참조를 통해서만 허용하기 위한 격리 방법
+>    - 권한이 전혀 없는 제작자 스타일의 모듈
+>    - 원시형/컨텍스트/내장 기능과 모듈의 다른 조합
+>    - 브라우저의 격리 부족: 연결되어 있는 다수의 전역 객체
+> 3. 계층화된 게스트 코드 호스팅, 분리된 객체 시스템 연결, 특히 호스트 객체 에뮬레이션을 위한 가상화 방법
+>    - 프록시
+>    - 약한 참조 또는 수명이 아주 짧은 객체
+> 4. 반복과 상태 머신 코드를 단순화하기 위한 제어 효과
+>    - 구분된 연속성
+>    - 제너레이터, 이터레이터
+> 5. TC39 위원회가 라이브러리 진화를 방해하지 않도록 하는 라이브러리/도구 지원
+>    - Object.hashcode
+>    - 몇몇 종류의 바이트 배열
+>    - 십진법 산술 등을 위한 값 타입
+> 6. 사용자를 나쁜 형태의 코드에서 벗어나도록 이끄는 "더 나은 유인책"을 제공하는 언어 개혁
+>    - 블록 범위 내에서 let, const, function
+>    - 기본 및 나머지 매개변수, 스프레드 연산자
+>    - 구조 분해
+> 7. 새로운 문법이 Harmony의 일부이기 때문에 하는 버전 관리
+>    - 이 테마는 최소한의 옵트인 버전 관리, 마이그레이션 용이성, 다음 에디션을 위한 미래 지향성을 강조한다.
+>
+> 그림 39. 2010년 Harmony의 기능 테마들 [Eich 2010a]
 
 2009년, 2010년과 2011년 상반기의 대부분 기간 동안 TC39의 챔피언들은 제안의 초안을 개발하고 위원회와 그 제안들을 검토하고 제안이 명세에 받아들여질 수 있도록 제안에 대한 광범위한 합의를 얻으려는 시도를 했다. 2009년 8월까지 Strawman 페이지 [TC39 Harmony 2009]는 원래 7개였다가 21개의 제안으로 성장했다. 2010년 초에는 Harmony 기능 집합의 전체적인 형태가 드러나기 시작했다. Brendan Eich [2010a]는 Harmony의 목표에 관한 페이지에 테마들(그림 39)을 추가하고 거기에 따라 제안들을 조직화했다. 2010년 12월에는 Strawman 페이지 [TC39 Harmony 2010b]가 66개의 제안으로 늘어났고 추가적인 17개의 제안 [TC39 Harmony 2010a]이 이미 연기되었거나 포기되었다. 2011년 5월 초에 Strawman 페이지 [TC39 Harmony 2011c; 부록 N]는 100개가 넘는 항목을 가지고 있었고, 승인된 제안 페이지 [TC39 Harmony 2011a]에는 17개의 항목이 있었다.
 
 2009년 Brendan Eich [TC39 2009b]는 TC39가 2011년 5월까지 "ES.next"의 기능 목록을 확정하고 2012년 6월 Ecma 총회에서 이를 승인받는 것을 목표로 할 것을 제안했다. 5월 목표일이 다가오면서 2012년 6월에 승인받는 게 달성 불가능하다는 게 명백해졌다. 하지만 명세 개발에 집중하기 위해 확정된 기능 목록을 작성하는 것은 여전히 의미가 있었다. 5월 회의 [TC39 2011b]의 대부분은 기능 제안 목록을 분류하고 어떤 남은 제안이 "Harmony Proposal" 상태로 승격될지에 대한 광범위한 합의에 도달하는 데에 쓰였다. 각 기능 제안은 승격 여부에 대한 합의가 존재하는지를 가늠하기 전에 논의되었다. 일부 제안은 최소한의 검토 후에 승격되거나 거부되었다. 다른 중요한 기능을 나타내는 제안들은 위원회가 당시의 기능 제안 초안에 만족하지 않았음에도 불구하고 승격되었다. 이런 제안들은 더 개선된 제안의 개발을 기다리는 의미의 플레이스홀더 역할을 했다. 모듈과 클래스가 이런 식으로 다루어졌다. Harmony의 최종적인 기능 집합은 그 회의에서 엄격하게 확정되지 않았다. ES.next의 개발이 계속됨에 따라 몇몇 제안이 추가되었고 몇몇은 제외되었다. 그러나 이 회의에서 나온 제안 목록은 이후 ES2015의 뼈대가 되었다. 그림 40은 5월 회의의 참가자들을 나열하고, 부록 O는 회의 후의 Harmony Proposal 페이지 [TC39 Harmony 2011b]를 보여준다.
 
-![그림 40](./pictures/figure40.png)
-
 ### 21.1.4 작성 시작(Writing Starts)
 
-![그림 41](./pictures/figure41.png)
+|                   |                    |                     |                   |
+| ----------------- | ------------------ | ------------------- | ----------------- |
+| Avner Aharon      | Microsoft          | Waldemar Horwat     | Google            |
+| Douglas Crockford | Yahoo! (Phone)     | Mark Miller         | Google            |
+| Brendan Eich      | Mozilla            | John Neumann        | Ecma              |
+| Cormac Flanagan   | UCSC               | Alex Russell        | Google            |
+| David Fugate      | Microsoft          | Mike Samuel         | Google            |
+| Dave Herman       | Mozilla            | István Sebestyén    | Ecma              |
+| Luke Hoban        | Microsoft          | Sam Tobin-Hochstadt | Northeastern Univ |
+| Bill Frants       | Periwinkle (guest) | Allen Wirfs-Brock   | Mozilla           |
+
+> 그림 40. 2011년 5월 TC39에서 기능 선별에 참가한 사람들 [TC39 2011b]
+
+> 5.1.4 보충 문법 개념 도입<br/>
+> 5.3 정적 시맨틱 규칙(Static Semantic Rules) 개념 도입<br/>
+> 8.6.2 [8.6.2] 및 여러 곳에서 `[[Class]]` 내부 속성 제거. 대신 다양한 내부 트레이드마크 속성 추가<br/>
+> 10.1.2 새로운 Es.next 문법을 사용할 수 있는 "확장된 코드"라는 개념 정의. 또한 "엄격한 코드"를 ES5 엄격 모드 코드 또는 확장된 코드를 의미하도록 재정의.<br/>
+> 11.1.4 배열 리터럴에서 스프레드 연산자 사용에 대한 문법과 시맨틱 추가<br/>
+> 11.1.5 속성 값 축약 및 다양한 시맨틱 헬퍼 추상 연산에 대한 문법과 시맨틱 추가<br/>
+> 11.2, 11.2.4 인수 목록에서 스프레드 연산자에 대한 문법과 시맨틱 추가<br/>
+> 11.13 구조 분해 할당 연산자에 대한 문법과 시맨틱 추가<br/>
+> 12.2 선언 및 형식 매개변수 목록에서 구조 분해를 지원하기 위해 BindingPattern 문법과 부분적인 시맨틱 추가<br/>
+> 13 형식 매개변수 목록에서 나머지 매개변수, 매개변수 기본 값, 구조 분해 패턴을 지원하는 문법 추가. 또한 그에 대한 정적 시맨틱도 포함됨. 그러나 이러한 매개변수의 인스턴스화는 아직 이루어지지 않았음. 이런 개선된 매개변수 목록에 대해 인수 목록의 "length" 정의<br/>
+> 15 조항 15의 함수 명세가 사실상 `[[Call]]` 내부 메소드의 정의임을 명확히 함.<br/>
+> 15.2.4.2 `[[Class]]`를 사용하지 않고 toString을 다시 명세함. 명시적 확장 메커니즘 추가는 아직 해야 할 일임.<br/>
+> 부록 B 웹 브라우저 ES 구현의 규범적 선택 기능으로 제목 변경.<br/>
+>
+> 그림 41. 첫번째 ES6 초안의 수정 사항 로그 [Wirfs-Brock et al. 2011a, reformatted]
 
 Allen Wirfs-Brock은 프로젝트의 편집자로서 TC39의 챔피언들에 의해 개발된 Harmony 제안으로부터 ES.next 명세 문서를 생성하는 것을 전반적으로 담당했다. 마이크로소프트에서 그의 업무는 TC39 관련 작업과 다른 프로젝트로 나뉘어 있었다. 2010년 12월, 그는 ES Harmony에 집중하기 위해 마이크로소프트를 떠나 모질라로 이직했다.
 
@@ -63,8 +140,7 @@ Dave Herman [2011b]은 "ES6는 허용이 필요하지 않다"라는 제목의 `e
 
 2011년 1월 Harmony 작업을 2년 이상 진행한 시점에 Brendan Eich [2011b]는 "내가 바라는 Harmony"라는 제목의 블로그 글을 게시했다. 이 글에서 그는 언어 발전과 표준 위원회에 대한 몇 가지 의견을 제시했다. 글의 핵심은 그가 희망하는 Harmony JavaScript가 어떤 모습일지에 대한 예시들을 제공한다.
 
-> ...저는 JavaScript Harmony에 대한 새로운 비전을 제시하고 싶습니다. 이러한 시도는 (아직) 공식적이지는 않지만 그렇다고 목표도 없고 기이하기만 한 허구도 아닙니다. 이와 같은 것은 실제로 일어날 수 있으며 여러분의 도움이 있다면 더욱 그럴싸해지고 나아질 것입니다(어떻게 할지는 마지막 부분에서 더 설명할 것입니다).
->
+> ...저는 JavaScript Harmony에 대한 새로운 비전을 제시하고 싶습니다. 이러한 시도는 (아직) 공식적이지는 않지만 그렇다고 목표도 없고 기이하기만 한 허구도 아닙니다. 이와 같은 것은 실제로 일어날 수 있으며 여러분의 도움이 있다면 더욱 그럴싸해지고 나아질 것입니다(어떻게 할지는 마지막 부분에서 더 설명할 것입니다).<br/>
 > 저는 TC39에서 현재 합의된 Harmony, TC39의 일부가 선호하는 초안 제안들, 제 아이디어 사이의 경계를 의도적으로 흐리게 하고 있습니다. 왜냐하면 저는 JS에 새로운 개념적 완전성이 필요하다고 생각하기 때문입니다. 거기에는 위원회가 안전하게 설계하는 게 필요하지 않습니다. TC39에서 통과되지 않을 "모든 제안을 합치자"는 접근이든, 역시 TC39에서 통과되지 않을 것이지만 "제안들을 교집합하고 만약 공집합만 남는다면 그대로 두자"는 접근이든 말입니다.
 
 그는 다양한 사용 사례들이 ES5 기능을 사용하여 어떻게 코딩되는지와 그가 꿈꾸는 Harmony에서는 같은 것을 어떻게 표현할 수 있는지에 대한 예시들을 제시했다. 이러한 예시들은 Harmony 제안들과 그것들이 실제 ES2015 기능으로 어떻게 진화했는지에 대한 중간 단계의 관점을 제공한다. 그가 제시한 것들의 일부는 ES2015에 포함되지 않았고 대부분의 기능들은 ES2015에 포함되었더라도 어떤 식으로든 변경되었다. 하나의 JS를 지향하는 접근 방식이 기존 기능의 문법과 의미를 명시적인 허용 모드 하에서 변경하는 것을 제한했으므로 다른 변경사항들이 필요했다.
@@ -172,7 +248,7 @@ module M {
 
 ```js
 // content of http ://M.com/M.js
-export { K } from " http ://N.com/N.js"; // binding of N.K exported
+export { K } from "http://N.com/N.js"; // binding of N.K exported
 export const add = (x, y) => x + y;
 ```
 
@@ -209,8 +285,8 @@ function* sqgen(n) {
 결합 문장에 괄호를 쓸 필요가 없게 한 더 현대적인 문법
 
 ```js
-if x > y { alert ("paren - free ") }
-if x > z return "brace - free "
+if x > y { alert ("paren-free") }
+if x > z return "brace-free "
 if x > y { f() } else if x > z { g() }
 ```
 
@@ -234,6 +310,37 @@ if x > y { f() } else if x > z { g() }
 
 원래의 명세와 그 개정판들은 이러한 세 부분을 뒤섞어 배치하여 기본적인 구조를 모호하게 만들었다. Allen Wirfs-Brock은 명세를 세 부분으로 나누고 명시적으로 조직하는 것이 명세를 이해하기 쉽게 만들고, ES6에서 새로 도입된 많은 부분들을 명확히 제시할 수 있도록 해줄 거라고 생각했다. 위원회는 이에 동의했다. 그림 42는 ES2015 명세의 새로운 구성을 ES5와 비교하여 보여준다.
 
+| 항목 | ECMA-262 5.1판(245쪽)                  | ECMA-262 6판(545쪽)                              |
+| ---- | -------------------------------------- | ------------------------------------------------ |
+| 1    | Scope                                  | Scope                                            |
+| 2    | Conformance                            | Conformance                                      |
+| 3    | Normative References                   | Normative References                             |
+| 4    | Overview                               | Overview                                         |
+| 5    | Conventions                            | Notational Conventions                           |
+| 6    | Source Text                            | ECMAScript Data Types and Values                 |
+| 7    | Lexical Conventions                    | Abstract Operations                              |
+| 8    | Types                                  | Executable Code and Execution Contexts           |
+| 9    | Type Conversion and Testing            | Ordinary and Exotic Object Behaviors             |
+| 10   | Executable Code and Execution Contexts | ECMAScript Language: Source Code                 |
+| 11   | Expressions                            | ECMAScript Language: Lexical Grammar             |
+| 12   | Statements                             | ECMAScript Language: Expressions                 |
+| 13   | Function Definition                    | ECMAScript Language: Statements and Declarations |
+| 14   | Program                                | ECMAScript Language: Functions and Classes       |
+| 15   | Standard Built-in ECMAScript Objects   | ECMAScript: Language: Scripts and Modules        |
+| 16   | Errors                                 | Error Handling and Language Extensions           |
+| 17   |                                        | ECMAScript Standard Built-in Objects             |
+| 18   |                                        | The Global Object                                |
+| 19   |                                        | Fundamental Objects                              |
+| 20   |                                        | Numbers and Dates                                |
+| 21   |                                        | Text Processing                                  |
+| 22   |                                        | Indexed Collections                              |
+| 23   |                                        | Keyed Collections                                |
+| 24   |                                        | Structured Data                                  |
+| 25   |                                        | Control Abstraction Objects                      |
+| 26   |                                        | Reflection                                       |
+
+> 그림 42. 5판과 6판의 구성. ES6 명세에서 항목 6-9는 가상 머신 시맨틱을 정의한다. 항목 10-15는 언어를 정의하고 17-26은 표준 라이브러리를 정의한다.
+
 ### 21.2.2 새로운 용어(New Terminology)
 
 ES6는 명세에서 사용된 몇몇 용어들을 명확히 하고 갱신할 수 있는 기회가 되었다. 주의가 필요했던 부분 하나는 객체의 명명법이었다. Javascript 1.0의 구현체는 호스트에서 정의한 객체와 Javascript 엔진에서 정의한 객체에 대한 접근 권한을 Javascript 프로그램에 제공했는데, 이러한 객체들은 ECMAScript 코드를 사용하여 생성할 수 있는 객체와는 근본적인 객체 시맨틱이 여러 일반적이지 않은 방향으로 차이가 있었다. ES1 명세는 "객체", "네이티브 객체", "표준 객체", "내장 객체", "표준 네이티브 객체", "내장 네이티브 객체", "호스트 객체"라는 용어를 사용하여 객체가 구현될 수 있는 다양한 방식을 나타냈다. 이러한 명칭들 사이의 구분은 명확하지 않았고 특별히 유용하지도 않았다. 이러한 카테고리 중 정확히 어느 것이 이례적인 객체 시맨틱을 허용하는지도 명확하지 않았고, JavaScript 프로그래머가 생성한 객체가 이 카테고리 중 어디에 속하는지도 명확하지 않았습니다.
@@ -252,7 +359,14 @@ ES6는 객체의 구조 분해와 같은 새로운 기능들을 도입했다. �
 
 ECMA-262의 각 후속 판들은 구현체간의 차이를 최소화하는 것을 목표로 하여 오류 조건의 정의와 오류가 감지되는 시점을 더욱 엄밀하게 정의했다. ES3은 암묵적으로 "조기 오류(early errors)"의 개념을 도입했는데 이는 ES5에서 더욱 세련되게 다듬어졌다. 조기 오류란 스크립트의 평가 이전에 감지되고 보고되는 스크립트상의 오류를 말한다. 조기 오류가 감지되면 스크립트가 평가되지 않는다. 가장 흔한 형태의 조기 오류는 소스 코드가 ECMAScript 문법을 사용하여 파싱될 수 없을 때 발생하는 구문 오류다. 구문 오류는 문법의 정의에 암묵적으로 포함되어 있다. ES3은 몇 가지 다른 종류의 조기 오류들을 도입했는데 `break`문을 렉시컬하게 둘러싸지 않는 문장 라벨을 참조하는 `break`문과 같은 것이 있었다. ES5의 엄격 모드(strict mode)에서는 몇 가지 더 추가되었다. 명세는 이렇게 추가된 것의 대부분이 파싱 오류가 아니라 언어의 정적 시맨틱 규칙 위반임에도 불구하고 이들을 구문 오류로 정의했다. ES6 이전에는 대부분의 이런 오류들이 평가 알고리즘 근처에 배치된 비공식적인 문장을 사용하여 명세되었다. 다른 오류들은 런타임 오류 조건을 테스트하는 의사코드를 평가 알고리즘 내에 포함시켜 명세되었고, 오류가 스크립트 평가 이전에 보고되어야 하는 조기 오류라는 것을 평문으로 명시했다.
 
-![그림 43](./pictures/figure43.png)
+> **13.3.1.1 Static Semantics: Early Errors**<br/> _LexicalDeclaration_ : _LetOrConst BindingList_ **;**<br/>
+> • It is a Syntax Error if the _BoundNames_ of BindingList contains `"let"`<br/>
+> • It is a Syntax Error if the _BoundNames_ of BindingList contains any duplicate entries.<br/> _LexicalBinding_ : _BindingIdentifier Initializer_<sub>opt</sub><br/>
+> • It is a Syntax Error if _Initializer_ is not present and IsConstantDeclaration of the _LexicalDeclaration_ containing this production is **true.**<br/>
+> ...<br/>
+> 13.3.1.3 **Static Semantics: IsConstantDeclaration** <br/> _LexicalDeclaration_ : _LetOrConst BindingList_ **;**<br/> &nbsp;&nbsp;&nbsp;&nbsp;1.Return IsConstantDeclaration of _LetOrConst_.<br/> _LetOrConst_ : **let**<br/> &nbsp;&nbsp;&nbsp;&nbsp;1.Return **false**.<br/> _LetOrConst_ : **const**<br/> &nbsp;&nbsp;&nbsp;&nbsp;1.Return **true.**
+>
+> 그림 43. ES6 정적 시맨틱 규칙 예시 [Wirfs-Brock 2015a, pages 194ś195]
 
 ES6의 기능은 많은 새로운 종류의 조기 오류들을 도입했다. 예를 들어 `let` 또는 `const` 선언을 사용하여 식별자를 중복으로 정의하려는 시도는 조기 오류다. ES6는 조기 오류 조건을 일관적으로 명세하기 위해 문법에 "정적 의미론(Static Semantics)" 소항목을 추가했다. 그림 43은 조기 오류 정의의 예시 집합을 보여준다. 여기서 볼 수 있듯이 조기 오류 규칙들은 정적인 시맨틱 알고리즘을 참조할 수 있다. 정적 시맨틱 알고리즘은 런타임 알고리즘과 같은 규칙을 사용하지만 스크립트의 평가 이전에 적용되기 때문에 ECMAScript 환경의 런타임 상태를 참조할 수 없다. 정적 시맨틱 조기 오류 규칙과 알고리즘은 소스코드를 실행하지 않고도 소스코드에서 추출할 수 있는 정보만 가지고 분석을 수행해야 하는 제약이 있다. 런타임 알고리즘은 정적 시맨틱 알고리즘을 호출할 수 있지만 정적 시맨틱 알고리즘은 런타임 알고리즘을 호출할 수 없다.
 
@@ -369,7 +483,27 @@ var Proxy(o, {
 
 `Reflect` 객체의 메소드는 표준 내부 메소드에 해당한다. 이는 핸들러가 객체의 내부 메서드를 암시적으로 호출하는 Javascript 코드 시퀀스를 사용하는 대신 핸들러가 객체 내부 메서드를 직접 호출할 수 있게 해준다. Direct Proxy 설계는 처음에는 대체로 ES5 내부 메소드를 기반으로 한 열여섯 가지 다른 트랩을 정의했다. 이 설계는 또한 내부 메소드의 관점에서 정의되지 않았기 때문에 Proxy가 가로채지 못하는 몇 가지의 객체 내부 작업을 식별했다. Tom Van Cutsem, Mark Miller, Allen Wirfs-Brock은 함께 Harmony의 내부 메소드와 Proxy 트랩이 일치하도록 공동 작업했다. 또한 그들은 이러한 트랩이 ECMAScript 명세와 호스트 객체에 의해 정의된 모든 객체 동작을 표현하는 데 충분하도록 공동으로 발전시켰다. 이는 새로운 내부 메서드를 추가하고 가로채기가 불가능한 몇몇 작업을 가로채기 가능한(trappable) 일반적인 메서드 호출로 재정의함으로써 이루어졌다. 각 내부 메서드에 대한 필수적인 불변성이 정의되었다. ECMAScript 구현체와 호스트는 이러한 불변성을 준수해야 하며, `Proxy`는 자체 호스팅된 exotic object에 대해서 그것을 강제[^91]한다. 그림 44는 ES2015 MOP의 요약이다.
 
-![그림 44](./pictures/figure44.png)
+| ES5 내부 메서드         | ES6 내부 메서드         | ES6 프록시 트랩 & Reflect 메서드 |
+| ----------------------- | ----------------------- | -------------------------------- |
+| `[[CanPut]]`            |                         |                                  |
+| `[[DefaultValue]]`      |                         |                                  |
+| `[[GetProperty]]`       |                         |                                  |
+| `[[HasProperty]]`       | `[[HasProperty]]`       | has                              |
+| `[[Get]]`               | `[[Get]]`               | get                              |
+| `[[GetOwnProperty]]`    | `[[GetOwnProperty]]`    | getOwnPropertyDescriptor         |
+| `[[Put]]`               | `[[Set]]`               | set                              |
+| `[[Delete]]`            | `[[Delete]]`            | deleteProperty                   |
+| `[[DefineOwnProperty]]` | `[[DefineOwnProperty]]` | defineProperty                   |
+| `[[Call]]`              | `[[Call]]`              | apply                            |
+| `[[Construct]]`         | `[[Construct]]`         | construct                        |
+|                         | `[[Enumerate]]`         | enumerate                        |
+|                         | `[[OwnPropertyKeys]]`   | ownKeys                          |
+|                         | `[[GetPrototypeOf]]`    | getPrototypeOf                   |
+|                         | `[[SetPrototypeOf]]`    | setPrototypeOf                   |
+|                         | `[[IsExtensible]]`      | isExtensible                     |
+|                         | `[[PreventExtensions]]` | preventExtensions                |
+
+> 그림 44. ES6/ES2015 메타 객체 프로토콜은 명세 수준의 내부 메서드에 의해 정의되고 Proxy 트랩과 Reflect 메서드에 의해 구체화된다.
 
 Direct Proxy 설계는 캡슐화된 대상 객체를 사용하지만, 대상 객체에 대해서 쉽고 투명한 래핑을 제공하는 것이 목적이 아니다. 보기와 달리 Proxy는 속성 접근을 로깅하거나 "찾을 수 없는 메서드"를 다루는 단순한 방법이 아니다. 그러한 사용 사례를 지원하기 위해 나이브하게 구현된 프록시 객체들은 보통 믿을 수 없거나 버그가 많다. Direct Proxy의 핵심 사용 사례는 객체의 가상화와 안전한 멤브레인의 생성이다. Mark Miller [2018]가 이렇게 설명한 것처럼 말이다.
 
@@ -582,7 +716,32 @@ Wirfs-Brock [2011c; 2011d]은 이와 연관된 제안 묶음에서 객체 리터
 
 대안적인 클래스 설계에 관한 계속되는 온라인 토론 [Ashkenas 2011; Eich 2011a; Herman 2011a]은 Dave Herman [2011d]이 새로운 "minimal classes" 제안서 초안을 작성하도록 동기를 부여했다. 이 제안서는 Herman의 이전 게시물에 "static" 생성자와 static 메서드를 추가하여 공식화한 것이었다. 이후 두 번의 TC39 회의에서 Herman의 최소 클래스 제안에 대한 논의는 거의 없었고, record 기능 계획과 관련해 합의되지 않은 부분들을 해결하는 데 있어 진전도 거의 없었다. Brendan Eich [2012c]는 이 문제를 다음과 같이 설명했다.
 
-![figure46](./pictures/figure46.png)
+```js
+class Monster extends Character {
+  constructor(name, health) { // the constructor function
+    super(); // call superclass constructor
+    public name = name; // a public instance property
+    private health = health; // a private instance variable
+  }
+  attack(target) { // a prototype method
+    log('The monster attacks' + target);
+  }
+  get isAlive() { // a prototype get accessor
+    return private(this).health > 0;
+  }
+  set health(value) { // a prototype set accessor
+    if (value < 0) {
+      throw new Error('Health must be non-negative.')
+    }
+    private(this).health = value
+  }
+  public numAttacks = 0; // a prototype data property
+  public
+  const attackMessage = 'The monster hits you!'; // read-only
+}
+```
+
+> 그림 46. Mark Miller [2011b]의 통합된 Harmony 클래스 제안서에 기반한 클래스 선언
 
 > ...Waldemar Horwat가 관찰한 일반적인 경향은 사실이다. 너무 최소화되면 의미가 없다. 너무 기능이 거대해지면 우리는 합의에 이를 수 없다. 우리는 딱 맞게 만들어진 온도/양인 "Goldilocks class"가 필요하다.
 
@@ -752,9 +911,31 @@ ES6 개발 과정에서 TC39에 의해 고려되었고 최종적으로 ES2015에
 
 ## 21.5 ECMAScript 2015 마침(Finishing ECMAScript 2015)
 
-![그림 47](./pictures/figure47.png)
+|                                    |                            |
+| ---------------------------------- | -------------------------- |
+| Allen Wirfs-Brock (Project Editor) | Microsoft, Mozilla         |
+| Brendan Eich                       | Mozilla, invited expert    |
+| Mark S. Miller                     | Google                     |
+| Waldemar Horwat                    | Google                     |
+| Dave Herman                        | Northeastern Univ, Mozilla |
+| Douglas Crockford                  | Yahoo!, PayPal             |
+| Erik Arvidsson                     | Google                     |
 
-![그림 48](./pictures/figure48.png)
+> 그림 47. ES2015 개발 활동 동안 계속 활동한 TC39 기술 기여자들. 각 사람은 ES2015 개발 기간 동안 있었던 41차례의 TC39 회의 중 적어도 30차례에 참석했다. Arvidsson은 2009년 5월 처음 참석했다. Crockford는 2014년 4월 마지막으로 참석했다. 나머지 사람들은 프로젝트의 시작부터 끝까지 참여했다.
+
+|                         |                        |                      |                      |
+| ----------------------- | ---------------------- | -------------------- | -------------------- |
+| Sam Tobin-Hochstadt(24) | Andreas Rossberg(13)   | Rafael Weinstein(10) | Chris Pine(7)        |
+| Alex Russell(21)        | Oliver Hunt(12)        | Jeff Dyer(8)         | Mike Samuel(6)       |
+| Luke Hoban(20)          | Norbert Lindenberg(12) | David Fugate(8)      | Ihab Awad(5)         |
+| Cormac Flanagan(18)     | Sam Ruby(12)           | Domenic Denicola(7)  | Reid Burke(5)        |
+| Yehuda Katz(17)         | Brian Terlson(12)      | Rick Hudson(7)       | Andreas Gal(5)       |
+| Rick Waldron(17)        | Sebastian Markbage(11) | Jafar Husain(7)      | Peter Jensen(5)      |
+| Eric Ferraiuolo(15)     | Jeff Morrison(11)      | Dimitry Lomov(7)     | Pratap Lakshman(5)   |
+| Tom Van Cutsem(14)      | Rob Sayre(10)          | Ben Newman(7)        | Nicholas Malsakic(5) |
+| Nebojsa Ćirić(13)       | Matt Sweeney(10)       | Caridy Patino(7)     |                      |
+
+> 그림 48. ES2015의 개발 동안 TC39 회의에 자주 참석했던 기술 기여자들. 옆의 숫자는 각 사람이 회의에 참석한 횟수를 나타낸다.
 
 2015년 3월 회의에서, TC39 [2015b]는 당시의 후보 명세 [Wirfs-Brock et al. 2015b,c]을 승인하고 Ecma 총회에 최종 승인을 요청했다. Ecma 총회는 2015년 6월 회의에서 투표를 통해 이를 수락 [Ecma International 2015a]했다. 그리고 즉시 ECMA-262, 제6판, "ECMAScript 2015 언어 명세[^101]" [Wirfs-Brock 2015a]을 발행했다.
 
@@ -788,3 +969,4 @@ Rafael Weinstein과 Dimitry Lomov는 새로운 기능 제안이 다섯 단계의
 [^98]: ES4<sub>2</sub> 제안 [TC39 ES4 2006c]에 기반한다.
 [^99]: 함수 내부에서 코드 시퀀스를 즉시 실행 함수로 감싸는 것은 원래 코드 시퀀스를 직접 실행하는 것과 같은 결과를 내야 한다.
 [^100]: Proper Tail Calls(PTC)는 논쟁적인 기능이었다. PTC는 적어도 하나의 주요 브라우저 엔진에서 성공적으로 구현되었지만 다른 브라우저들은 이를 지원하기를 거부했다.
+[^101]: TC39는 제목에 연도를 추가했다. 6판에 이어 점진적인 연간 업데이트를 할 계획을 세웠기 때문이다. Javascript 커뮤니티가 명세의 판수가 아니라 연도를 기준으로 명세 개정 사항을 참조하도록 만드는 것이 희망 사항이었다.
