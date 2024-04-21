@@ -9,7 +9,7 @@ const config: Config = {
 
   // Set the production url of your site here
   // 여기로 배포할 거다
-  url: "https://js-history.witch.work/",
+  url: "https://js-history.vercel.app/",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: "/",
