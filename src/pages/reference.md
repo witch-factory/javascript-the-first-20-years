@@ -46,7 +46,7 @@ https://www.infoworld.com/article/2653798/javascript-creator-ponders-past--futur
 
 http://crockford.com/javascript/popular.html
 
-더글라스 크록포드가 JS의 탄생 당시 상황을 약간 묘사한 부분이 있는데, 브랜든 아이크가 쓴 'Popularity'에서는 이 부분에 대해 더글라스는 넷스케이프에 있지 않았는데 이야기를 만들어내고 있다고 깠다.
+더글라스 크록포드가 JS의 탄생 당시 상황을 약간 묘사한 부분이 있는데, 브랜든 아이크가 쓴 'Popularity'에서는 이 부분에 대해 더글라스는 Netscape에 있지 않았는데 이야기를 만들어내고 있다고 깠다.
 
 - 브랜든 아이크의 블로그
 
@@ -75,7 +75,7 @@ https://webdevelopmenthistory.com/1995-the-birth-of-javascript/
 
 1995년의 JS가 탄생하던 상황을 묘사한 글
 
-- 넷스케이프가 브라우저에 Java를 넣겠다고 한 보도자료
+- Netscape가 브라우저에 Java를 넣겠다고 한 보도자료
 
 https://web.archive.org/web/19970614003224/http://home.netscape.com/newsref/pr/newsrelease25.html
 
