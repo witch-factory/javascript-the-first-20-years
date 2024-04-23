@@ -14,9 +14,13 @@ JS는 왜 이렇게 되었는지에 대한 간략한 발표를 준비하다가 J
 
 다만 기술 문서의 특성을 감안하여 문체나 뉘앙스까지 완벽히 옮길 수는 없더라도 내용의 정확성은 보장하고자 노력하였습니다. 그 과정에서 참고하게 된 문서들은 [참고 문서](https://js-history.vercel.app/reference)에서 확인할 수 있습니다.
 
-# 멤버
+# 번역자
 
 [김성현](https://witch.work/), soakdma37@gmail.com
+
+# 기여
+
+[이창희](https://github.com/blurfx)
 
 # 번역 진행 상황
 

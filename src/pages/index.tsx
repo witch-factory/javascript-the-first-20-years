@@ -19,11 +19,10 @@ function HomepageHeader() {
 }
 
 export default function Home(): JSX.Element {
-  const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
       title='Javascript 역사 번역'
-      description='Description will go into a meta tag in <head />'
+      description='Javascript의 역사를 다룬 문서 Javascript: The First 20 Years의 번역본'
     >
       <HomepageHeader />
       <main>
