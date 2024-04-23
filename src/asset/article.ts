@@ -16,9 +16,9 @@ type Part =
 export const articleList: Part[] = [
   {
     items: [
-      { title: "초록", url: "/docs/paper/abstract" },
+      { title: "초록", url: "/docs/abstract" },
       { title: "목차", url: "/" },
-      { title: "1. 소개", url: "/docs/paper/introduction" },
+      { title: "1. 소개", url: "/docs/introduction" },
     ],
   },
   {
