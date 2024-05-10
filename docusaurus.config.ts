@@ -40,7 +40,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            "https://github.com/witch-factory/javascript-the-first-20-years/",
+            "https://github.com/witch-factory/javascript-the-first-20-years/blob/main/",
         },
         blog: false,
         theme: {
