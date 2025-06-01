@@ -88,27 +88,47 @@ const config: Config = {
       style: "dark",
       links: [
         {
-          title: "Docs",
+          title: "목차",
           items: [
             {
-              label: "Docs",
+              label: "초록",
               to: "/docs/abstract",
+            },
+            {
+              label: "소개",
+              to: "/docs/introduction",
+            },
+            {
+              label: "1부: Javascript의 기원",
+              to: "/docs/part-1",
+            },
+            {
+              label: "2부: 표준 만들기",
+              to: "/docs/part-2",
+            },
+            {
+              label: "3부: 실패한 개혁, ES4",
+              to: "/docs/part-3",
+            },
+            {
+              label: "4부: Javascript 현대화",
+              to: "/docs/part-4",
             },
           ],
         },
         {
-          title: "More",
+          title: "정보",
           items: [
             {
-              label: "Original Paper",
+              label: "원본 논문",
               href: "https://dl.acm.org/doi/10.1145/3386327",
             },
             {
-              label: "Translator GitHub",
+              label: "번역자 GitHub",
               href: "https://github.com/witch-factory",
             },
             {
-              label: "Translator Blog",
+              label: "번역자 블로그",
               href: "https://witch.work/",
             },
           ],
